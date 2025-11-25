@@ -1,0 +1,357 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{ruuskanen_power_2020}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=e51518904eaba34461b85325ad77a068}{%
+           family={Ruuskanen},
+           familyi={R\bibinitperiod},
+           given={Vesa},
+           giveni={V\bibinitperiod}}}%
+        {{hash=db4d8d79a49a2d1aad3a0877989b6beb}{%
+           family={Koponen},
+           familyi={K\bibinitperiod},
+           given={Joonas},
+           giveni={J\bibinitperiod}}}%
+        {{hash=99f328ac6bd8eace001bf2c3b9994a4d}{%
+           family={Kosonen},
+           familyi={K\bibinitperiod},
+           given={Antti},
+           giveni={A\bibinitperiod}}}%
+        {{hash=60e8b4860872c2175d685acddc9e93de}{%
+           family={Hehemann},
+           familyi={H\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=42d1b49f0db26203bef6e19b405be8cf}{%
+           family={Keller},
+           familyi={K\bibinitperiod},
+           given={Roger},
+           giveni={R\bibinitperiod}}}%
+        {{hash=471f5535f060642631dc9b7a9fac06c1}{%
+           family={Niemelä},
+           familyi={N\bibinitperiod},
+           given={Markku},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f9e852e08f0c3e104eb17c41562f64d7}{%
+           family={Ahola},
+           familyi={A\bibinitperiod},
+           given={Jero},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{6b5019877f29474b6333d13b6f612393}
+      \strng{fullhash}{87d558898a7227caee44c113ddca49cd}
+      \strng{fullhashraw}{87d558898a7227caee44c113ddca49cd}
+      \strng{bibnamehash}{6b5019877f29474b6333d13b6f612393}
+      \strng{authorbibnamehash}{6b5019877f29474b6333d13b6f612393}
+      \strng{authornamehash}{6b5019877f29474b6333d13b6f612393}
+      \strng{authorfullhash}{87d558898a7227caee44c113ddca49cd}
+      \strng{authorfullhashraw}{87d558898a7227caee44c113ddca49cd}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Power Sources}
+      \field{month}{2}
+      \field{title}{Power quality estimation of water electrolyzers based on current and voltage measurements}
+      \field{volume}{450}
+      \field{year}{2020}
+      \field{pages}{227603}
+      \range{pages}{1}
+      \verb{file}
+      \verb Accepted Version:C\:\\Users\\chowd\\Zotero\\storage\\BWLDANHP\\Ruuskanen et al. - 2020 - Power quality estimation of water electrolyzers ba.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{martinez_lopez_dynamic_2023}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=edd8939c8273b9c44367411a2795dba9}{%
+           family={Martinez\bibnamedelima Lopez},
+           familyi={M\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={V.A.},
+           giveni={V\bibinitperiod}}}%
+        {{hash=497158f787ca4a804e01e415a3777622}{%
+           family={Ziar},
+           familyi={Z\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=19c502331be25b53abda00aae2a9113d}{%
+           family={Haverkort},
+           familyi={H\bibinitperiod},
+           given={J.W.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a6e40a88a78c45f047b7d37d9d085d92}{%
+           family={Zeman},
+           familyi={Z\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1f66b96b85d2f8da711be2d5db9388fc}{%
+           family={Isabella},
+           familyi={I\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{b67421fb1e5aa7608d8509010cd561f7}
+      \strng{fullhash}{725e8a48d4e0242296fb6da68a66c65e}
+      \strng{fullhashraw}{725e8a48d4e0242296fb6da68a66c65e}
+      \strng{bibnamehash}{725e8a48d4e0242296fb6da68a66c65e}
+      \strng{authorbibnamehash}{725e8a48d4e0242296fb6da68a66c65e}
+      \strng{authornamehash}{b67421fb1e5aa7608d8509010cd561f7}
+      \strng{authorfullhash}{725e8a48d4e0242296fb6da68a66c65e}
+      \strng{authorfullhashraw}{725e8a48d4e0242296fb6da68a66c65e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Renewable and Sustainable Energy Reviews}
+      \field{month}{8}
+      \field{title}{Dynamic operation of water electrolyzers}
+      \field{volume}{182}
+      \field{year}{2023}
+      \field{pages}{113407}
+      \range{pages}{1}
+    \endentry
+    \entry{sanchez_comparative_2024}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=ff38b5aa811bbe7c75a8db0c763b3e3a}{%
+           family={Sánchez},
+           familyi={S\bibinitperiod},
+           given={Lidia},
+           giveni={L\bibinitperiod}}}%
+        {{hash=5c3f861c5b0ea18e83e75f555424a43d}{%
+           family={Reigosa},
+           familyi={R\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=db400a67fe0c8fce20ceb4eb4486cd4a}{%
+           family={Bilbao},
+           familyi={B\bibinitperiod},
+           given={Aitor},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b9a50b0768dc2c273e38646f6ec052b9}{%
+           family={Peña-Gonzalez},
+           familyi={P\bibinithyphendelim G\bibinitperiod},
+           given={Iker},
+           giveni={I\bibinitperiod}}}%
+        {{hash=76da32f16999613ad1c64a802b732e17}{%
+           family={Briz},
+           familyi={B\bibinitperiod},
+           given={Fernando},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{1c26d7c4f798f1f833ffc5fb1085fb4e}
+      \strng{fullhash}{071ac3ee670cada456ca15d14533f287}
+      \strng{fullhashraw}{071ac3ee670cada456ca15d14533f287}
+      \strng{bibnamehash}{071ac3ee670cada456ca15d14533f287}
+      \strng{authorbibnamehash}{071ac3ee670cada456ca15d14533f287}
+      \strng{authornamehash}{1c26d7c4f798f1f833ffc5fb1085fb4e}
+      \strng{authorfullhash}{071ac3ee670cada456ca15d14533f287}
+      \strng{authorfullhashraw}{071ac3ee670cada456ca15d14533f287}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Journal of Emerging and Selected Topics in Power Electronics}
+      \field{number}{5}
+      \field{title}{Comparative Analysis of Power Converter Topologies for Hydrogen Electrolyzers}
+      \field{volume}{12}
+      \field{year}{2024}
+      \field{pages}{4325\bibrangedash 4341}
+      \range{pages}{17}
+      \keyw{Topology;Voltage;Power harmonic filters;Power quality;Harmonic analysis;Aging;Hydrogen;AC-DC power converters;ac power quality;dc power quality;hydrogen electrolyzer}
+    \endentry
+    \entry{Solanki2013ComparisonOT}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=da31ffb2920d59ebc07f614438299d77}{%
+           family={Solanki},
+           familyi={S\bibinitperiod},
+           given={Jitendra},
+           giveni={J\bibinitperiod}}}%
+        {{hash=233474081614abb934869dc214fc839e}{%
+           family={Fröhleke},
+           familyi={F\bibinitperiod},
+           given={Norbert},
+           giveni={N\bibinitperiod}}}%
+        {{hash=65acd53e3e55d1616a8ecc68695a7302}{%
+           family={Böcker},
+           familyi={B\bibinitperiod},
+           given={Joachim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=48896cafe4a689900a369ccc927987d0}{%
+           family={Wallmeier},
+           familyi={W\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{2ccf27738bcff9bda9803797e3a18978}
+      \strng{fullhash}{b234b011f4c371d0a7a82f640c5bb43a}
+      \strng{fullhashraw}{b234b011f4c371d0a7a82f640c5bb43a}
+      \strng{bibnamehash}{b234b011f4c371d0a7a82f640c5bb43a}
+      \strng{authorbibnamehash}{b234b011f4c371d0a7a82f640c5bb43a}
+      \strng{authornamehash}{2ccf27738bcff9bda9803797e3a18978}
+      \strng{authorfullhash}{b234b011f4c371d0a7a82f640c5bb43a}
+      \strng{authorfullhashraw}{b234b011f4c371d0a7a82f640c5bb43a}
+      \field{extraname}{1}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Comparison of Thyristor-Rectifier with Hybrid Filter and Chopper-Rectifier for High-Power , High-Current Application}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://api.semanticscholar.org/CorpusID:53310787
+      \endverb
+      \verb{url}
+      \verb https://api.semanticscholar.org/CorpusID:53310787
+      \endverb
+    \endentry
+    \entry{solanki_highcurrent_2015}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=da31ffb2920d59ebc07f614438299d77}{%
+           family={Solanki},
+           familyi={S\bibinitperiod},
+           given={Jitendra},
+           giveni={J\bibinitperiod}}}%
+        {{hash=233474081614abb934869dc214fc839e}{%
+           family={Fröhleke},
+           familyi={F\bibinitperiod},
+           given={Norbert},
+           giveni={N\bibinitperiod}}}%
+        {{hash=65acd53e3e55d1616a8ecc68695a7302}{%
+           family={Böcker},
+           familyi={B\bibinitperiod},
+           given={Joachim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b9166419095e18fe39ff11063498ffbf}{%
+           family={Averberg},
+           familyi={A\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=48896cafe4a689900a369ccc927987d0}{%
+           family={Wallmeier},
+           familyi={W\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{2ccf27738bcff9bda9803797e3a18978}
+      \strng{fullhash}{6f5a7722d9dd107005fc179546a6a66d}
+      \strng{fullhashraw}{6f5a7722d9dd107005fc179546a6a66d}
+      \strng{bibnamehash}{6f5a7722d9dd107005fc179546a6a66d}
+      \strng{authorbibnamehash}{6f5a7722d9dd107005fc179546a6a66d}
+      \strng{authornamehash}{2ccf27738bcff9bda9803797e3a18978}
+      \strng{authorfullhash}{6f5a7722d9dd107005fc179546a6a66d}
+      \strng{authorfullhashraw}{6f5a7722d9dd107005fc179546a6a66d}
+      \field{extraname}{2}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{journaltitle}{IET Power Electronics}
+      \field{month}{6}
+      \field{number}{6}
+      \field{shorttitle}{High‐current variable‐voltage rectifiers}
+      \field{title}{High‐current variable‐voltage rectifiers}
+      \field{volume}{8}
+      \field{year}{2015}
+      \field{pages}{1068\bibrangedash 1080}
+      \range{pages}{13}
+    \endentry
+    \entry{blintz_parallel_rectifier_2018}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=ee7b34fed93bb881e30a5a847dee3582}{%
+           family={Bintz},
+           familyi={B\bibinitperiod},
+           given={Steffen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=76815be950cda92b513f4f00df876d65}{%
+           family={Fischer},
+           familyi={F\bibinitperiod},
+           given={Manuel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=82b597cacac1f0b4e15acd7c15ba8389}{%
+           family={Roth-Stielow},
+           familyi={R\bibinithyphendelim S\bibinitperiod},
+           given={Jörg},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{dff505993f9857ceb70c4253e94def37}
+      \strng{fullhash}{dff505993f9857ceb70c4253e94def37}
+      \strng{fullhashraw}{dff505993f9857ceb70c4253e94def37}
+      \strng{bibnamehash}{dff505993f9857ceb70c4253e94def37}
+      \strng{authorbibnamehash}{dff505993f9857ceb70c4253e94def37}
+      \strng{authornamehash}{dff505993f9857ceb70c4253e94def37}
+      \strng{authorfullhash}{dff505993f9857ceb70c4253e94def37}
+      \strng{authorfullhashraw}{dff505993f9857ceb70c4253e94def37}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 20th European Conference on Power Electronics and Applications (EPE'18 ECCE Europe)}
+      \field{title}{Parallel Rectifier for Regenerative Hydrogen Production Utilizing a Combination of Thyristor and PWM-based Topologies}
+      \field{year}{2018}
+      \field{pages}{P.1\bibrangedash P.10}
+      \range{pages}{-1}
+      \keyw{Rectifiers;Thyristors;Topology;Hydrogen;Electrochemical processes;Europe;Production;DC power supply;power factor correction;parallel operation;renewable energy systems;thyristor}
+    \endentry
+    \entry{siemens_water_electrolysis_2023}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=a9c0d1c3769020ff0f80e6e7b69b9a26}{%
+           family={Schumann},
+           familyi={S\bibinitperiod},
+           given={Sven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b9ab8391b03b225335e5128129938323}{%
+           family={Runser},
+           familyi={R\bibinitperiod},
+           given={Thibaut},
+           giveni={T\bibinitperiod}}}%
+        {{hash=4e1fb119050f83d224aeef4e3ade512f}{%
+           family={Herzig},
+           familyi={H\bibinitperiod},
+           given={Fabian},
+           giveni={F\bibinitperiod}}}%
+        {{hash=3969e9d1845459911c7a61e91966e16e}{%
+           family={Craciun},
+           familyi={C\bibinitperiod},
+           given={Bogdan},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{d814da4ae03eae9bf39c094910d0977b}
+      \strng{fullhash}{269eae9bb4899c8ca864aa7d6ccd1692}
+      \strng{fullhashraw}{269eae9bb4899c8ca864aa7d6ccd1692}
+      \strng{bibnamehash}{269eae9bb4899c8ca864aa7d6ccd1692}
+      \strng{authorbibnamehash}{269eae9bb4899c8ca864aa7d6ccd1692}
+      \strng{authornamehash}{d814da4ae03eae9bf39c094910d0977b}
+      \strng{authorfullhash}{269eae9bb4899c8ca864aa7d6ccd1692}
+      \strng{authorfullhashraw}{269eae9bb4899c8ca864aa7d6ccd1692}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Components of Power Electronics and their Applications 2023: ETG Symposium}
+      \field{title}{Water Electrolysis Power Supply}
+      \field{year}{2023}
+      \field{pages}{122\bibrangedash 128}
+      \range{pages}{7}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

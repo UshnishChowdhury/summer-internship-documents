@@ -1,0 +1,414 @@
+\documentclass[11pt,aspectratio=169,xcolor=dvipsnames]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{import}
+\usepackage{steinmetz}
+\usepackage{booktabs}
+\usepackage[official]{eurosym}
+\usepackage[backend=biber,style=ieee,maxcitenames=3]{biblatex}
+\usepackage{import}
+\usepackage[caption=false,font=footnotesize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{xcolor}
+\usepackage{svg}
+\usepackage{bookmark}
+\usepackage[version=4]{mhchem}
+\usepackage{ragged2e}
+\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\renewcommand{\arraystretch}{1.5}
+\bibliography{Electrolyzer}
+
+
+\usefonttheme{professionalfonts}
+
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+\usecolortheme[named=black]{structure}
+\usefonttheme{structurebold}
+\urlstyle{sf}
+
+\setbeamertemplate{frametitle continuation}{}
+\setbeamertemplate{section in toc}[sections numbered]
+\makeatletter
+\def\blfootnote{\xdef\@thefnmark{}\@footnotetext}
+\makeatother
+
+\renewcommand\multicitedelim{\addsemicolon\space}
+\mode<presentation>
+\usetheme{default}
+\title[title]{Converter Power Supplies for Electrolyzers}
+\author[Chowdhury]{Ushnish Chowdhury}
+\subject{Designing an electrical model of an electrolyzer}
+\date{October 4, 2024}
+
+\AtBeginSection[]{\begin{frame}\tableofcontents[currentsection]\end{frame}}
+% --------------------------------------------------------------------
+\begin{document}
+
+% Title page
+% --------------------------------------------------------------------
+\begin{frame}
+	\includegraphics[scale=.1]{Aalto_ELEC_EN_21_BLACK_1.png}\vspace{-.5Em}
+	\titlepage
+\end{frame}
+
+%Overview page
+% --------------------------------------------------------------------
+\begin{frame}{Table of Content}
+	\begin{itemize}
+        \item Typical power requirements for electrolyzers\vspace{0.5Em}
+        \item State-of-the-art power supplies currently used in the market \vspace{0.5Em}
+        \item Future recommendations in various literature \vspace{0.5Em}
+    \end{itemize}
+\end{frame}
+% ------------------------------------------------------------------------
+
+% \section{Green Hydrogen Technology}
+
+%     \begin{frame}{Green Hydrogen Technology}
+%       \begin{center}
+%         \def\svgwidth{\textwidth}
+%         \input{green_hydrogen_technology.pdf_tex}
+%       \end{center}
+%     \end{frame}
+
+%     \begin{frame}{Hydrogen Production in Europe 
+%       \footfullcite{european_commission_directorate_general_for_energy_hydrogen_2020}}
+%       \begin{itemize}
+%       \item Current statistics \vspace{0.5Em}
+%           \begin{itemize}
+%           \item 11.5 Mt produced in 2022, with 96\% based on natural gas reforming \vspace{0.2Em}
+%           \item Only 0.3\% based on water electrolysis \vspace{0.2Em}
+%           \item Prime contributors: Germany, the Netherlands and Poland \vspace{0.5Em}
+%           \end{itemize}
+%       \item Targets for 2030 \vspace{0.5Em}
+%           \begin{itemize}
+%           \item Scale up production up to 10 Mt/year  \vspace{0.2Em}
+%           \item Directly connecting 80-120 GW of renewable energy production capacity to 
+%           electrolyzers \vspace{0.5Em}
+%           \end{itemize}
+%       \item Targets for 2050 \vspace{0.5Em}
+%           \begin{itemize}
+%           \item Increase renewable electrolyzer capacity to at least 500 GW
+%           \end{itemize}  
+%       \end{itemize}
+%     \end{frame}
+
+%     \begin{frame}{Hydrogen Production in Finland \footnote{Source: Hydrogen cluster Finland - h2cluster.fi}}
+%         \begin{itemize}
+%           \item Current statistics \vspace{0.5Em}
+%             \begin{itemize}
+%               \item 0.2 Mt/year, with 99\% based on natural gases \vspace{0.5Em}
+%             \end{itemize} 
+%           \item Targets for 2030 
+%           \vspace{0.5Em}
+%             \begin{itemize}
+%               \item Produce at least 10\% of EU's green hydrogen \vspace{0.2Em}
+%               \item 1 Mt production with a forecasted consumption of 12-98 TWh clean electricity \vspace{0.5Em}
+%             \end{itemize}
+%           \item Advantages for Finland \vspace{0.5Em}
+%             \begin{itemize}
+%               \item Abundance of renewable energy source, wind energy in particular \vspace{0.2Em}
+%               \item Availability of resource reserves \vspace{0.2Em}
+%               \item Expertise in designing cost-effective electrolyzers
+%             \end{itemize}  
+%         \end{itemize}
+%       \end{frame}
+
+% \section{Basic Principle of Water Electrolysis}
+%   \begin{frame}{Basic Principle of Water Electrolysis}
+%     \begin{columns}[t]
+%       \begin{column}{.4\textwidth}
+%         \begin{itemize}
+%             \item Process of passing electric current through a substance 
+%             to induce a chemical change (oxidation and reduction) \vspace{0.5Em}
+%             \item Electrolyzer is a device which uses electrolysis to split water molecules 
+%             into hydrogen and oxygen \footnote{Water needs to be pre-processed; \\ 
+%             1 kg \ce{H_2} production requires $\approx$ 9 L processed water}  
+%             \\ \vspace{1.5Em}
+%             \centerline{\ce{H_2O} (l) = \ce{H_2} (g) + \ce{1/2O_2} (g)}
+%         \end{itemize}
+%       \end{column}
+%       \begin{column}{.6\textwidth}
+%         \begin{center}
+%           \def\svgwidth{\textwidth}
+%           \input{general_electrolyzer.pdf_tex}
+%         \end{center}
+%       \end{column}
+%     \end{columns}     
+%   \end{frame}
+
+%   \begin{frame}{Alkaline and PEM Electrolyzers}
+%   \end{frame}  
+
+% \section{Power Requirements for Electrolyzers}
+%   \begin{frame}{System Characteristics}
+%     \begin{columns}[t]
+%       \begin{column}{.5\textwidth}
+%         \begin{itemize}
+%           \item \textcolor{red}{Low voltage} and \textcolor{red}{high current} device \vspace{0.2Em}
+%           \item Ideal hydrogen production rate \\ \vspace{0.2Em}
+%           \begin{center}
+%             $\dot{n}_{\ce{H_2}} = \eta\dfrac{i_{\text{E}}}{n_{\text{e}}F}$ \vspace{0.75Em}
+%           \end{center}
+%           \item Nonlinear and dynamic behavior
+%         \end{itemize}
+%       \end{column}
+%       \begin{column}{.5\textwidth}
+%       \end{column}
+%     \end{columns} \vspace{0.2Em}
+
+%     \begin{flushleft}
+%       \begin{itemize}
+%         \item Partial-load operation limits; \\ 20\% for AEL and 5\% for PEMEL 
+%         of nominal capacity \footfullcite{martinez_lopez_dynamic_2023} \vspace{0.2Em}
+%       \end{itemize}
+%     \end{flushleft}
+      
+%   \end{frame}
+\section{Electrolyzer Characteristics}
+  \begin{frame}{Characteristics}
+    \begin{center}
+      \def\svgwidth{0.6\textwidth}
+      \input{electrolyzer-ratings.pdf_tex}
+    \end{center} \vspace{1Em}
+    \begin{itemize}
+        %\item Requires DC voltage and current as input \vspace{0.2Em}
+        %\item Step-down and high current capabilities \vspace{0.2Em}
+        \item \textcolor{red}{Low voltage} and \textcolor{red}{high current} device; power range in 
+        \textcolor{red}{MW} \footfullcite{abb_state-of-the-art_2022} \vspace{0.2Em}
+        \item Current ripple frequency in range $<\text{100 Hz}$ and $>\text{300 Hz}$ have negligible effect 
+        on efficiency \footfullcite{ruuskanen_power_2020} \vspace{0.2Em}
+        % \item Further study ongoing to estimate the effect of current harmonics on 
+        % electrolyzer lifespan and degradation \footfullcite{ruuskanen_power_2020}
+
+        \item Partial-load operation limits; 20\% for AEL and 5\% for PEMEL of nominal capacity 
+        \footfullcite{martinez_lopez_dynamic_2023} \vspace{0.2Em}
+    \end{itemize}    
+  \end{frame}
+
+  \begin{frame}{Electrolyzer Model for Converters \footnote{Applicable for both alkaline 
+    and proton membrane exchange electrolyzers}}
+      \begin{columns}
+        \begin{column}{0.5\textwidth}
+          \begin{center}
+            \def\svgwidth{0.7\textwidth}
+            \input{simple_electrical_model_electrolyzer.pdf_tex}
+          \end{center}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+          \begin{flushleft}
+            \begin{align*}
+              u_{\text{E}} &= i_{\text{E}} Z(s) + u_{\text{rev}} \\
+              => u_{\text{E}} &= i_{\text{E}} R + u_{\text{rev}}
+            \end{align*}
+          \end{flushleft}   
+        \end{column}
+      \end{columns} \vspace{1Em}
+      \begin{itemize} 
+        \item Assumes linear operation under constant temperature and pressure \vspace{0.3Em}
+        \item Impedance considered to be purely resistive, $Z(s) = R$ \vspace{0.3Em}
+      \end{itemize} 
+    \end{frame}
+  
+  \section{State-of-the-Art Electrolyzer Power Supplies}
+    \begin{frame}{Voltage-Source Rectifers}
+      \begin{itemize}
+        \item Grid currents almost sinusoidal \vspace{0.3Em}
+        %\item Lower energy consumption in electrolyzers \footfullcite{koponen_effect_of_converter_2019} \vspace{0.2Em}
+        \item Higher losses at high current operation \vspace{0.3Em}
+        \item Parallelizing required to meet high current demands,
+        increased number of components increase cost and carbon footprint of the system \vspace{0.3Em}  
+      \end{itemize} \vspace{1Em}
+      \begin{center}
+        \def\svgwidth{0.9\textwidth}
+        \input{vsc-based-rectifier.pdf_tex}
+      \end{center}
+    \end{frame}  
+
+    \begin{frame}{Thyristor Rectifiers}
+      % \begin{itemize}
+      %   \item Simple, reliable with low device losses \vspace{0.2Em}
+      %   \item Semi-controllable, 
+      %   \item Can be directly connected to the electrolyzer, DC side inductance 
+      %   can be ignored \footfullcite{iribarren_modelling_2022}
+      % \end{itemize}
+      % \begin{columns}
+      %   \begin{column}{0.5\textwidth}
+      %     \begin{center}
+      %       \def\svgwidth{0.9\textwidth}
+      %       \input{six-pulse-thyristor-bridge.pdf_tex}
+      %     \end{center}
+      %   \end{column}
+      %   \begin{column}{0.5\textwidth}
+      %     \begin{center}
+      %       \def\svgwidth{0.9\textwidth}
+      %       \input{12-pulse-thyristor-bridge.pdf_tex}
+      %     \end{center}
+      %   \end{column}
+      % \end{columns}  \vspace{1Em}  
+      % \begin{itemize}
+      %   \item Generates significant reactive power, higher short-circuit power and 
+      %   harmonic filters recommended to 
+      %   comply with harmonic regulations \footfullcite{iribarren_asymmetrical_2023} \vspace{0.2Em}
+      %   %\item Electrolyzer energy consumption 20\% higher than pure dc supply \vspace{0.2Em} %\footfullcite{koponen_effect_of_converter_2019} 
+      % \end{itemize}
+
+      \begin{columns}
+        \begin{column}{0.4\textwidth}
+          \begin{itemize}
+            \item Simple, reliable with low device losses, cheap \vspace{0.2Em}
+            \item Semi-controllable, PI controller to determine firing angle \vspace{0.2Em}
+            \item High dc current ripple, high harmonic content on the ac side \vspace{0.2Em}
+            \item 12-pulse configuration used to reduce harmonics
+          \end{itemize}  
+        \end{column}
+        \begin{column}{0.6\textwidth}
+          \begin{center}
+            \def\svgwidth{0.9\textwidth}
+            \input{six-pulse-thyristor-bridge.pdf_tex}
+          \end{center} \vspace{1Em}
+          \begin{center}
+            \def\svgwidth{0.9\textwidth}
+            \input{12-pulse-thyristor-bridge.pdf_tex}
+          \end{center}
+        \end{column}  
+      \end{columns}    
+    \end{frame}
+    
+    % \begin{frame}{LCC-based Power Supplies: \begin{small} Twelve-Pulse Thyristor Rectifier \end{small}} 
+    %   \begin{center}
+    %     \def\svgwidth{0.5\textwidth}
+    %     \input{12-pulse-individual-row.pdf_tex}
+    %   \end{center}
+    %   \begin{itemize}
+    %     \item Better grid power quality, lower dc current ripple in comparison 
+    %     to 6-pulse thyristor rectifier \vspace{0.2Em}
+    %     \item Simple PI current controller to get firing angle from reference output current \vspace{0.2Em}
+    %     \item Higher short-circuit power and harmonic filters recommended to 
+    %     comply with harmonic regulations \footfullcite{iribarren_asymmetrical_2023} \vspace{0.2Em}
+    %     \item Electrolyzer energy consumption 10\% higher than pure dc supply \vspace{0.2Em}
+    %   \end{itemize} 
+    % \end{frame}
+
+    % \begin{frame}{Current Controller for Thyristor Rectifier}
+    % \end{frame}
+    
+    \begin{frame}{PLECS Model \footfullcite{koponen_effect_of_converter_2019}}
+      \begin{center}
+        \includegraphics[scale=.35]{plecs-schematics-12-thy.png} 
+      \end{center}
+    \end{frame}
+    
+    \begin{frame}{Simulation Results ($L_\text{\normalfont ac} = 0.01$ p.u.)}
+      % \begin{columns}
+      %   \begin{column}{0.5\textwidth}
+      %     \begin{center}
+      %       \includegraphics[scale=.2]{12-pulse-scope-1-pu.pdf} 
+      %     \end{center}
+      %   \end{column}
+      %   \begin{column}{0.5\textwidth}
+      %   \end{column}    
+      % \end{columns}
+      \begin{columns}
+        \begin{column}{0.5\textwidth}
+          \begin{center}
+            \includegraphics[scale=0.7]{scope-1-pu.png} 
+          \end{center}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+          \begin{center}
+            \includegraphics[scale=0.7]{scope-1-pu-harmonics.png} 
+          \end{center}
+        \end{column}    
+      \end{columns}
+    \end{frame}
+    
+    \begin{frame}{Simulation Results ($L_\text{\normalfont ac} = 0.20$ p.u.)}
+      \begin{columns}
+        \begin{column}{0.5\textwidth}
+          \begin{center}
+            \includegraphics[scale=0.7]{scope-20-pu.png} 
+          \end{center}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+          \begin{center}
+            \includegraphics[scale=0.7]{scope-20-pu-harmonics.png} 
+          \end{center}
+        \end{column}    
+      \end{columns}
+    \end{frame}
+
+    \begin{frame}{Thyristor Rectifiers with Hybrid Filter \footfullcite{sanchez_comparative_2024}}
+      \begin{center}
+        \def\svgwidth{0.6\textwidth}
+        \input{12-pulse-thyristor-bridge-with-hybrid-filter.pdf_tex}
+      \end{center}
+      \begin{itemize}
+        \item Hybrid filter to provide both harmonic and reactive power compensation \vspace{0.3Em}
+        \item APF connection to the primary side can increase transformer losses due to current harmonics produced by electrolyzer \vspace{0.3Em}
+        \item Multilevel configuration or additional coupling transformer required, increasing system cost and complexity
+      \end{itemize}
+    \end{frame}
+      
+    \begin{frame}{Diode Rectifiers with DC Chopper \footfullcite{Solanki2013ComparisonOT}}
+      \begin{center}
+        \def\svgwidth{0.9\textwidth}
+        \input{12-pulse-diode-bridge-with-dc-chopper.pdf_tex}
+      \end{center}
+    \begin{itemize}
+        \item Better efficiency for medium to low electrolyzer applications compared to thyristor topology with hybrid filter \vspace{0.3Em}
+        \item Smaller output filter requirements due to chopper section; capacitor filter required 
+          after rectifier stage; larger inductors on both AC and DC side \vspace{0.3Em}
+        \item System still bulky, passive component cost higher 
+    \end{itemize}
+   \end{frame}
+      
+      \section{Recommended Topologies in Literature}
+        \begin{frame}{Current-Source Rectifiers \footfullcite{solanki_highcurrent_2015}} 
+          \begin{center}
+            \def\svgwidth{0.65\textwidth}
+            \input{current-source-rectifier.pdf_tex}
+          \end{center}
+          \begin{itemize}
+            \item Controllable step down rectifier; low current THD \vspace{0.3Em}
+            \item DC side inductor to reduce output current ripple; capacitors to 
+            filter input current; DC-DC converter not required \vspace{0.3Em}
+            \item Not as matured as voltage-source rectifiers
+          \end{itemize}
+        \end{frame}
+
+        \begin{frame}{Parallel Rectifiers with Thyristor and Active Front End 
+          \footfullcite{blintz_parallel_rectifier_2018, siemens_water_electrolysis_2023}}
+          \begin{center}
+            \def\svgwidth{0.5\textwidth}
+            \input{12-pulse-thyristor-igbt-parallel-bridge.pdf_tex}
+          \end{center}
+          \begin{itemize}
+            \item Thyristor rectifier will deliver main part of output current (\textgreater \, 80 \%); AFE 
+            for smoothening current \vspace{0.3Em}
+            \item Reduced number of passive components \vspace{0.3Em}
+            \item Technology not matured, needs further investigation
+          \end{itemize}
+        \end{frame}
+  \section{Summary}
+    \begin{frame}{Summary}
+      \begin{itemize}
+        \item Electrolyzer is a high current, multi-MW device, requiring dc current for operation \vspace{0.3Em}
+        \item Power intermittency have significant effect on efficiency compared to high frequency current ripple \vspace{0.3Em}
+        \item From a converter prospective, electrolyzer can be modeled as a resistive voltage source \vspace{0.3Em}
+        \item Pros and cons of state-of-the-art power converters used in the industry have been discussed \vspace{0.3Em}
+        \item Some potential topologies suggested in literature have been showcased \vspace{0.3Em} 
+        \item Future focus should be on compact, cost-effective, compatible converter topologies; control methods 
+        and semiconductor materials also to be considered \vspace{0.3Em}
+      \end{itemize}  
+    \end{frame}      
+\end{document}

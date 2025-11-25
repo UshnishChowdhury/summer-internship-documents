@@ -1,0 +1,67 @@
+%% Creator: Inkscape 1.3.2 (091e20e, 2023-11-25, custom), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'a_b_parameters.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{725.80372247bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.48755283)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{a_b_parameters.pdf}}%
+    \put(0.0221609,0.30120938){\color[rgb]{0.10196078,0.10196078,0.10196078}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\text{b} = 1 - 1.206\cdot10^{-3}\text{m} + 5.602\cdot10^{-4}\text{m}^{2} - 7.823\cdot10^{-6}\text{m}^{3}$\\\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{a_b_parameters.pdf}}%
+    \put(0.32524267,0.44476579){\color[rgb]{0.10196078,0.10196078,0.10196078}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Parameters for \ce{KOH}\end{tabular}}}}%
+    \put(0.02260167,0.37055873){\color[rgb]{0.10196078,0.10196078,0.10196078}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\text{a} = -0.015 \text{m} - 1.679\cdot10^{-3}\text{m}^{2} + 2.259\cdot10^{-5}\text{m}^{3}$\\\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{a_b_parameters.pdf}}%
+    \put(0.02327366,0.04423593){\color[rgb]{0.10196078,0.10196078,0.10196078}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\text{b} = 1 - 1.341\cdot10^{-3}\text{m} + 7.072\cdot10^{-4}\text{m}^{2} - 9.536\cdot10^{-6}\text{m}^{3}$\\\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{a_b_parameters.pdf}}%
+    \put(0.32251927,0.19089289){\color[rgb]{0.10196078,0.10196078,0.10196078}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Parameters for \ce{NaOH}\end{tabular}}}}%
+    \put(0.02484128,0.1155363){\color[rgb]{0.10196078,0.10196078,0.10196078}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\text{a} = -0.011 \text{m} - 1.461\cdot10^{-3}\text{m}^{2} + 2.035\cdot10^{-5}\text{m}^{3}$\\\\\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

@@ -1,0 +1,81 @@
+%% Creator: Inkscape 1.3.2 (091e20e, 2023-11-25, custom), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'green_hydrogen_technology.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{602.09693248bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.52583467)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{green_hydrogen_technology.pdf}}%
+    \put(0.65797205,0.45804605){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\ce{H_2O}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{green_hydrogen_technology.pdf}}%
+    \put(0.03296218,0.19750807){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Wind\end{tabular}}}}%
+    \put(0.03548367,0.37895085){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Solar\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{green_hydrogen_technology.pdf}}%
+    \put(0.31871711,0.28547494){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Electric grid\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{green_hydrogen_technology.pdf}}%
+    \put(0.71578587,0.06675446){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\ce{H_2O}\end{tabular}}}}%
+    \put(0.66821913,0.22800454){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\ce{H_2}\end{tabular}}}}%
+    \put(0.73166452,0.45763944){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\ce{O_2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{green_hydrogen_technology.pdf}}%
+    \put(0.81631196,0.42934076){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Excess heat\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{green_hydrogen_technology.pdf}}%
+    \put(0.85968846,0.28182687){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Industrial\end{tabular}}}}%
+    \put(0.86169924,0.13920246){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Heavy duty\\ vehicles\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{green_hydrogen_technology.pdf}}%
+    \put(0.592781,0.00021852){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Fuel cell\end{tabular}}}}%
+    \put(0.71697256,0.03287948){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}\ce{O_2}\end{tabular}}}}%
+    \put(0.76834343,0.36458847){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Electrolyzer\end{tabular}}}}%
+    \put(0.86009853,0.21778628){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Chemical\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{green_hydrogen_technology.pdf}}%
+    \put(0.85904089,0.25425071){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}processes\end{tabular}}}}%
+    \put(0.86028597,0.19457417){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}synthesis\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

@@ -1,0 +1,167 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{european_commission_directorate_general_for_energy_hydrogen_2020}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=e07030bf0abb2709ed431c7295c26ece}{%
+           family={{European Commission. Directorate General for Energy.}},
+           familyi={E\bibinitperiod}}}%
+        {{hash=ba764757f4067e94b1ca8fcfc155b333}{%
+           family={{Guidehouse.}},
+           familyi={G\bibinitperiod}}}%
+        {{hash=6ec2056e4ab26f0617dac9c67655670c}{%
+           family={{Tractebel Impact.}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {LU}%
+      }
+      \list{publisher}{1}{%
+        {Publications Office}%
+      }
+      \strng{namehash}{c5085cf7ecee5b1565288b48ebb76931}
+      \strng{fullhash}{c5085cf7ecee5b1565288b48ebb76931}
+      \strng{fullhashraw}{c5085cf7ecee5b1565288b48ebb76931}
+      \strng{bibnamehash}{c5085cf7ecee5b1565288b48ebb76931}
+      \strng{authorbibnamehash}{c5085cf7ecee5b1565288b48ebb76931}
+      \strng{authornamehash}{c5085cf7ecee5b1565288b48ebb76931}
+      \strng{authorfullhash}{c5085cf7ecee5b1565288b48ebb76931}
+      \strng{authorfullhashraw}{c5085cf7ecee5b1565288b48ebb76931}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{shorttitle}{Hydrogen generation in {Europe}}
+      \field{title}{Hydrogen generation in {Europe}: overview of costs and key benefits.}
+      \field{urlday}{9}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://data.europa.eu/doi/10.2833/122757
+      \endverb
+      \verb{url}
+      \verb https://data.europa.eu/doi/10.2833/122757
+      \endverb
+    \endentry
+    \entry{JARVINEN202231985}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=5406b86b4894be177508f72836e59168}{%
+           family={Järvinen},
+           familyi={J\bibinitperiod},
+           given={Lauri},
+           giveni={L\bibinitperiod}}}%
+        {{hash=754230697d4f12a1b90e0bf27790b391}{%
+           family={Puranen},
+           familyi={P\bibinitperiod},
+           given={Pietari},
+           giveni={P\bibinitperiod}}}%
+        {{hash=99f328ac6bd8eace001bf2c3b9994a4d}{%
+           family={Kosonen},
+           familyi={K\bibinitperiod},
+           given={Antti},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e51518904eaba34461b85325ad77a068}{%
+           family={Ruuskanen},
+           familyi={R\bibinitperiod},
+           given={Vesa},
+           giveni={V\bibinitperiod}}}%
+        {{hash=f9e852e08f0c3e104eb17c41562f64d7}{%
+           family={Ahola},
+           familyi={A\bibinitperiod},
+           given={Jero},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a87de09f81d48dd5af799170445e43aa}{%
+           family={Kauranen},
+           familyi={K\bibinitperiod},
+           given={Pertti},
+           giveni={P\bibinitperiod}}}%
+        {{hash=60e8b4860872c2175d685acddc9e93de}{%
+           family={Hehemann},
+           familyi={H\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{6e5ad20554c553d31ed4df270c2f1178}
+      \strng{fullhash}{a1361aaeff696abaa204c8a8a9fa9d27}
+      \strng{fullhashraw}{a1361aaeff696abaa204c8a8a9fa9d27}
+      \strng{bibnamehash}{6e5ad20554c553d31ed4df270c2f1178}
+      \strng{authorbibnamehash}{6e5ad20554c553d31ed4df270c2f1178}
+      \strng{authornamehash}{6e5ad20554c553d31ed4df270c2f1178}
+      \strng{authorfullhash}{a1361aaeff696abaa204c8a8a9fa9d27}
+      \strng{authorfullhashraw}{a1361aaeff696abaa204c8a8a9fa9d27}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A comprehensive literature review of current water electrolyzer modelling research was conducted and presented models critically evaluated. Based on the literature review this paper presents an open-source MATLAB toolbox for water electrolyzer polarisation curve parametrization and modelling. The modelling capabilities of the tooling were verified using measured PEM and alkaline water electrolyzer polarisation data. As real-world measurement data is rarely ideal, tests were also conducted using suboptimal data, first with data sets that have a low number of measurement points and secondly with data sets that have low or high current densities missing. The tooling is shown to work with a wide variety of use cases and provides an automated method for modelling and parametrization of electrolyzer polarisation curves.}
+      \field{journaltitle}{International Journal of Hydrogen Energy}
+      \field{number}{75}
+      \field{title}{Automized parametrization of PEM and alkaline water electrolyzer polarisation curves}
+      \field{volume}{47}
+      \field{year}{2022}
+      \field{pages}{31985\bibrangedash 32003}
+      \range{pages}{19}
+      \keyw{Water electrolyzer modelling,PEM water electrolysis,Alkaline water electrolysis,Hydrogen}
+    \endentry
+    \entry{URSUA201218598}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=04a9f744e32c5273541c6271a90db2b6}{%
+           family={Ursúa},
+           familyi={U\bibinitperiod},
+           given={Alfredo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=268ebe6b5fb8495ca1a33bd25bbaed73}{%
+           family={Sanchis},
+           familyi={S\bibinitperiod},
+           given={Pablo},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{2b6db779fe0e76fb3cac2ad6ab7c63cc}
+      \strng{fullhash}{2b6db779fe0e76fb3cac2ad6ab7c63cc}
+      \strng{fullhashraw}{2b6db779fe0e76fb3cac2ad6ab7c63cc}
+      \strng{bibnamehash}{2b6db779fe0e76fb3cac2ad6ab7c63cc}
+      \strng{authorbibnamehash}{2b6db779fe0e76fb3cac2ad6ab7c63cc}
+      \strng{authornamehash}{2b6db779fe0e76fb3cac2ad6ab7c63cc}
+      \strng{authorfullhash}{2b6db779fe0e76fb3cac2ad6ab7c63cc}
+      \strng{authorfullhashraw}{2b6db779fe0e76fb3cac2ad6ab7c63cc}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper analyses the permanent and transient behaviour of a 1Nm3h−{1} commercial advanced alkaline water electrolyser and develops a complete and integrated static–{dynamic} electrical model that can be applied to any commercial water electrolyser. The model is based on the thermodynamic, activation, double-layer and ohmic effects and phenomena that take place in a real alkaline electrolysis process. The parameters of the model are experimentally determined from both static and dynamic operating tests to the electrolyser. Based on these tests, the electrical behaviour of the electrolyser has been characterized, concluding that, at operating conditions of 45°C and 25bar, the cell area-specific resistance is 0.431Ωcm2 and the cell specific double-layer capacitances are 0.0467Fcm−2 for the anodic interface and 2.25×10−3Fcm−2 for the cathodic interface. The model has been implemented on MATLAB-Simulink® and validated in three different operating environments: at static operation by means of the I–V characteristic curves; at dynamic operation by means of a sinusoidal current of various amplitudes and frequencies superimposed to a DC current; and by using two power supplies with different conversion topologies, the first one harmonic free and the other with a high harmonic content. As it will be shown in the paper, the model simulations reproduce with a high accuracy the experimental electrical behaviour of the electrolyser.}
+      \field{journaltitle}{International Journal of Hydrogen Energy}
+      \field{number}{24}
+      \field{title}{Static–{dynamic} modelling of the electrical behaviour of a commercial advanced alkaline water electrolyser}
+      \field{volume}{37}
+      \field{year}{2012}
+      \field{pages}{18598\bibrangedash 18614}
+      \range{pages}{17}
+      \keyw{Alkaline water electrolyser,Dynamic modelling,Equivalent electric circuit,Renewable hydrogen}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

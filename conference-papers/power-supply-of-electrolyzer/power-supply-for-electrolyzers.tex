@@ -1,0 +1,260 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{gensymb}
+\usepackage[version=4]{mhchem}
+\usepackage{cleveref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{svg}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+\title{Power Supplies for Electrolyzers}
+
+\author{\IEEEauthorblockN{Ushnish Chowdhury}
+    \IEEEauthorblockA{\textit{Department of Electrical Engineering and Automation} \\
+        \textit{Aalto University, Finland} \\
+        ushnish.chowdhury@aalto.fi}
+}
+
+\maketitle
+
+\begin{abstract}
+This paper emphasizes the crucial role of semiconductor-based converters in facilitating efficient and reliable green hydrogen production. The power requirements of electrolyzers are analyzed to identify suitable power supply solutions. Several state-of-the-art converter topologies are reviewed, accompanied by future recommendations from various literature to address current challenges and enhance system performance.
+\end{abstract} \vspace{0.5Em}
+
+\begin{IEEEkeywords}
+    Converter power supplies, electrolyzers, rectifiers, hydrogen
+\end{IEEEkeywords}
+
+\section{Introduction} \label{sec:introduction}
+% \IEEEPARstart{T}{\lowercase{he}} production of green hydrogen has become a critical topic of international discussion due to its potential to address climate change and support the transition to sustainable energy systems \cite{noauthor_green_2020, irena_green_hydrogen_2024}. 
+\IEEEPARstart{G}{\lowercase{reen}} hydrogen offers a viable option for decarbonizing sectors that are hard to electrify, including industrial processes, chemical synthesis, and heavy-duty transportation \cite{irena_green_hydrogen_2024}. Green hydrogen is produced by devices called electrolyzers with renewable energy sources acting as their primary power provider, involving no zero carbon emission at every step. By serving as a clean energy carrier, green hydrogen can play an important role in achieving international climate goals and reducing reliance on fossil fuels in these energy-intensive sectors. Recognizing the benefits of green hydrogen, countries worldwide have set collective production targets, aiming for 25.7 million tonnes (Mt) by 2030 and an increase to 135.8 Mt by 2050 \cite{irena_green_hydrogen_2024}.
+
+Electrolyzers, the key enablers for green hydrogen production, are devices characterized by their high current demand \cite{siemens_water_electrolysis_2023, abb_state-of-the-art_2022}. These systems use electrical energy to split water into hydrogen and oxygen, relying on significant power inputs to achieve efficient operation. As the cornerstone of green hydrogen generation, advancements in electrolyzer technology are crucial for scaling production, reducing costs, and improving energy efficiency to meet the growing global demand for sustainable energy solutions. In addition to these advancements, parallel improvements in supporting infrastructure are essential to ensure seamless and efficient hydrogen production. Among these, power supply systems play a significant role, as they must be capable of meeting the high current demands and operational stability required by electrolyzers. 
+
+The power supply for an electrolyzer system constitutes approximately 20\% of the total capital expenditure \cite{siemens_water_electrolysis_2023, acevedo_cost_analysis_2023}. Therefore, optimizing them is crucial to lowering the overall cost of large-scale hydrogen production. Efforts to enhance power supply efficiency, reliability, and cost-effectiveness can significantly impact the economic feasibility of green hydrogen, particularly as the industry aims to scale up to meet increasing global demand. Innovations in semiconductor-based rectifier topologies and their control are therefore pivotal to advancing green hydrogen production, ensuring that each stage of the process operates with minimal or zero carbon emissions.
+
+This paper begins by providing a brief overview of the system characteristics of electrolyzers and the design considerations for their power supplies, presented in Section \ref{sec:electrolyzer-characteristics}. Section \ref{sec:electrolzer-power-supplies} delves into the state-of-the-art rectifier technologies currently employed in the industry for large-scale green hydrogen production. Finally, Section \ref{sec:reccomendations} presents few promising topologies discussed in literature that can serve as effective solutions for powering electrolyzers, offering improvements over the current technologies in use.
+ 
+\section{System Characteristics of Electrolyzers} \label{sec:electrolyzer-characteristics}
+Industrial-scale electrolyzers are low-voltage, high-current systems operating within the multi-megawatt power range \cite{siemens_water_electrolysis_2023, abb_state-of-the-art_2022}. They are fundamentally based on Faraday's law of electrolysis, where the rate of hydrogen production is directly proportional to the supplied current value. Therefore, low operating voltage minimizes overpotential losses in the system, while maximizing hydrogen output. Electrolyzer cells are configured in series to form stacks, with the arrangement tailored to the system's rated power and stack voltage, which typically ranges from a few hundred volts to approximately 1 kV. To further enhance hydrogen production capacity, multiple stacks can be connected in parallel, allowing scalability to meet the specific requirements of hydrogen production facilities. This modular approach enables flexibility in design, accommodating varying production demands while optimizing efficiency and reliability in large-scale industrial operations \cite{siemens_water_electrolysis_2023}. Hence, power supplies must have capabilities to deliver DC current in kiloampere region (upto 10 kA). Power conversion is typically implemented in one of two configurations. In a single-stage system, a single rectifier is directly connected to the grid to convert AC power to DC. In a two-stage system, AC power is first converted to DC using a rectifier, and a subsequent DC-DC converter is implemented to achieve the desired voltage level.
+% \begin{figure}[b!]
+%     \centering
+%     \includesvg[width=\linewidth]{nyquist-example.svg}
+%     \caption{Example Nyquist plot for electrolyzer impedance}
+%     \label{fig:nyquist-plot-example}
+% \end{figure}
+
+Ripples in the output DC current influence the specific energy consumption and efficiency of electrolyzers. Ideally, the hydrogen flow rate in electrolyzers reaches its maximum when supplied with pure DC currents \cite{koponen_effect_2020, koponen_effect_of_converter_2019}. Analyzing the frequency response of the linearized impedance indicates that the impact of nonlinear components in the electrolyzer reduces as the frequency of the output current increases. This behavior is illustrated in Fig. \ref{fig:nyquist-plot-example}, where the nonlinear resistances $R_{\textrm{act,an}}$ and $R_{\textrm{act,ca}}$ diminish to zero at higher frequencies, leaving the linear resistance $R_{\textrm{ohm}}$ as the sole contributor to the total impedance. Therefore, from a semiconductor-based converter's point-of-view, which typically inject frequencies $\geq$ 300 Hz on the output current, the electrolyzer can be considered as a resistive voltage source with constant operating temperature and pressure as shown in Fig. \ref{fig:impedance}. However, current ripples at very high frequencies (\textgreater 10 kHz) can have adverse effects on the electrolyzer's lifespan and lead to cell degradation. So the acceptable frequency range in the output current can be bounded between low frequencies of \textgreater 50 Hz and \textless 10 kHz \cite{siemens_water_electrolysis_2023}.
+\begin{figure}[t!]
+    \centering
+    \includesvg[width=\linewidth]{nyquist-example.svg}
+    \caption{Example Nyquist plot for electrolyzer impedance}
+    \vspace{1Em}
+    \label{fig:nyquist-plot-example}
+\end{figure}
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{simple_electrical_model_electrolyzer.pdf_tex}
+    \caption{Electrolyzer impedance from a converter's perspective}
+    \label{fig:impedance}
+\end{figure}
+
+The harmonics introduced by the converters on the AC side must also be carefully considered, as they are required to comply with current standards and grid codes. Ensuring harmonic distortion remains within permissible limits is essential to maintain grid stability, minimize power quality issues, and prevent potential negative impacts on other connected equipment. This necessitates the implementation of appropriate harmonic filtering and power factor compensation, depending on the converter-technology being used for this purpose. Short-circuit power requirements is another important factor when considering a rectifier topology. Facilities designed for green hydrogen production are often anticipated to be connected to islanded grids, where the available short-circuit power is either limited or not clearly defined, particularly in the absence of rotating machines.
+
+\section{State-of-the-Art Electrolyzer Power Supplies} \label{sec:electrolzer-power-supplies}
+\subsection{Voltage-Source Rectifiers}
+Given the specific requirements of electrolyzers, insulated gate bipolar transistor (IGBT) based voltage-source rectifiers (VSRs) are regarded as the optimal choice for their power supply, owing to their capability to deliver precise control, high efficiency, and reliable performance across a range of operating conditions \cite{siemens_water_electrolysis_2023, abb_state-of-the-art_2022}. Their impact on the AC side is minimal, as they contribute lower harmonic distortion in grid currents. This characteristic ensures improved power quality but also reduces the need for extensive filtering. As shown in Fig. \ref{fig:vsc-based-drives}, industrial drives operating within this current range often employ a back-to-back converter configuration, where the later stage functions as an interleaved DC chopper. This technique serves to minimize high current stress on the switches while significantly reducing output current ripple, thereby enhancing overall system performance.
+
+Due to the current limitations of IGBTs, these converters require the parallelization of switches to meet the high current demands of electrolyzers. This parallelization increases the number of semiconductors within the topology, along with additional components such as control units, cooling systems, and protective devices like fuses, resulting in higher cost and carbon footprint of the overall system. Moreover, IGBTs exhibit reduced efficiency in high-current applications, primarily due to increased conduction and switching losses, which can adversely impact the overall performance and reliability of the system.
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{vsc-based-rectifier.pdf_tex}
+    \caption{Voltage Source Converter-based industrial drive for electrolyzers}
+    \label{fig:vsc-based-drives}
+\end{figure}
+\begin{figure}[t!]
+    \begin{subfigure}{\columnwidth}
+        \centering
+        \def\svgwidth{\textwidth}
+        \input{six-pulse-diode-bridge-rectifer.pdf_tex}
+        \caption{}
+        \label{fig:six-pulse-diode-bridge}
+        \vspace{1Em}
+    \end{subfigure}
+    \newline
+    \begin{subfigure}{\columnwidth}
+        \centering
+        \def\svgwidth{\textwidth}
+        \input{12-pulse-diode-bridge.pdf_tex}
+        \caption{}
+        \vspace{1Em}
+        \label{fig:12-pulse-diode-bridge}
+    \end{subfigure}
+    \caption{Multipulse diode bridge rectifiers (a) six-pulse configuration (b) twelve-pulse configuration}
+\end{figure}
+\begin{figure}[b!]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{12-pulse-diode-bridge-dc-dc-buck.pdf_tex}
+    \caption{Twelve-pulse diode rectifier with DC-DC buck converter}
+    \vspace{0.3Em}
+    \label{fig:12-pulse-diode-bridge-with-dc-dc-buck}
+\end{figure}
+
+\subsection{Diode Rectifiers}
+Replacing IGBTs with diodes is an alternative solution, fulfilling the high-current tolerance requirements of an electrolyzer stack. A six-pulse configuration approach, as shown in Fig. \ref{fig:six-pulse-diode-bridge} simplifies the overall topology, enhancing reliability and efficiency while significantly reducing semiconductor losses under high-current operating conditions. Diode-based configurations also benefit from fewer switching components, resulting in lower thermal stress and reduced cooling requirements.
+
+However, diode rectifiers are inherently uncontrollable, lacking active regulation of power flow or respond dynamically to changes in operating conditions. Moreover, high current harmonics on the grid side caused by diode rectifiers can lead to substantial power quality issues, including increased voltage distortion and higher losses. Therefore, grid standards and codes do not allow the direct connection of such devices to the grid \cite{noauthor_ieee_harmonic, noauthor_ieee_distributed}. A twelve-pulse configuration (as shown in Fig. \ref{fig:12-pulse-diode-bridge}) can effectively reduce the harmonic content in the grid current, improving power quality by minimizing distortion. But implementing such topologies require specialized phase-shifting transformers, known as on-load tap-changing (OLTC) transformers, which adjust the primary winding taps to maintain the desired voltage levels \cite{wang_intelligent_2011}. However, such configurations introduce an additional layer of maintenance complexity, accompanied by mechanical losses within the OLTC transformers, thereby increasing the overall system cost and reducing its reliability.
+
+Overcoming these challenges related to such multipulse diode rectifiers require a two-stage power conversion, where a DC-DC buck converter is combined to the 12-pulse diode configuration (as shown in Fig. \ref{fig:12-pulse-diode-bridge-with-dc-dc-buck}). The DC-DC buck converter regulates the output voltage by stepping it down to the desired level. While AC-side power filters remain necessary to enhance power quality on the AC side, their size can be significantly reduced compared to configurations that does not have the buck converter stage.
+
+\begin{figure}[t]
+    \begin{subfigure}{\columnwidth}
+        \centering
+        \def\svgwidth{\textwidth}
+        \input{six-pulse-thyristor-bridge-rectifer.pdf_tex}
+        \caption{}
+        \vspace{1Em}
+        \label{fig:six-pulse-thyristor-bridge}
+    \end{subfigure}
+    \newline
+    \begin{subfigure}{\columnwidth}
+        \centering
+        \def\svgwidth{\textwidth}
+        \input{12-pulse-thyristor-bridge.pdf_tex}
+        \caption{}
+        \vspace{1Em}
+        \label{fig:12-pulse-thyristor-bridge}
+    \end{subfigure}
+    \caption{Multipulse thyristor bridge rectifiers (a) six-pulse configuration (b) twelve-pulse configuration}
+\end{figure}
+\begin{figure}[t]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{12-pulse-thyristor-bridge-with-hybrid-filter.pdf_tex}
+    \vspace{0.3Em}
+    \caption{Twelve-pulse thyristor rectifier with hybrid filter}
+    \label{fig:12-pulse-thyristor-bridge-with-apf}
+\end{figure}
+
+\subsection{Thyristor Rectifiers}
+Unlike diodes, thyristors are classified as semi-controllable devices, as their turn-on timing can be controlled by adjusting the firing angle. By delaying the gate pulse, the conduction phase of the thyristor can be shifted, allowing for greater flexibility in controlling the output voltage, preferably decreasing the DC voltage. The current is regulated using a straightforward Proportional-Integral controller, which determines the firing angle based on the difference between the reference current and the measured output current. Thyristors are also efficient devices with minimal semiconductor losses. Their ability to tolerate high current levels (up to 10 kA) makes them particularly well-suited for demanding applications such as electrolyzers. Fig. \ref{fig:six-pulse-thyristor-bridge} shows a six-pulse thyristor rectifier configuration, which is most commonly used in industries.
+
+Similar to diodes, thyristors generate harmonics that can distort the quality of the current on the AC side, making them unsuitable for direct connection to the power grid. Increasing the number of pulses to 12 or higher enhances power quality on the input side and reduces output ripples \cite{zargari_multilevel_1997}. However, the number of pulses is typically limited to twelve (as shown in Fig. \ref{fig:12-pulse-thyristor-bridge}), as higher pulse counts necessitate additional semiconductors, thereby increasing the overall system cost. OLTC transformers play a crucial role in such configurations, as they enable the adaptation of the secondary voltage with minimal impact on the firing angle of the thyristors \cite{siemens_water_electrolysis_2023}. However, this solution is costly and requires the exploration of alternative options to enhance cost-effectiveness.
+
+Fig. \ref{fig:12-pulse-thyristor-bridge-with-apf} illustrates the integration of active power filters (APFs) or static compensators (STATCOMs) combined with passive filters and multi-pulse thyristor rectifiers, offering reactive power compensation and harmonic content reduction \cite{solanki_highcurrent_2015}. The APF consists of a voltage-source converter connected to a DC link capacitor. It can be installed on either the primary side, the secondary side, or both sides of the phase-shifting transformer, depending on the specific system parameters and operational requirements \cite{sanchez_comparative_2024}. Control algorithms are applied to the APFs to address the system's varying reactive power demands effectively. However, the implementation of such filters can result in a decrease in the overall efficiency of the system, especially in high-current applications, and may also lead to an increase in the total cost. Additionally, the system's size may become larger due to the utilization of bulkier passive filters.
+
+% \begin{figure}[ht]
+%     \begin{subfigure}[htbp]{\linewidth}
+%         \centering
+%         \includegraphics[width=0.45\linewidth]{example-image}
+%         \caption{}
+%     \end{subfigure}
+%     \begin{subfigure}[htbp]{\linewidth}
+%         \centering
+%         \includegraphics[width=0.45\linewidth]{example-image}
+%         \caption{}
+%     \end{subfigure}
+%     \begin{subfigure}[htbp]{\linewidth}
+%         \centering
+%         \includegraphics[width=0.45\linewidth]{example-image}
+%         \caption{}
+%     \end{subfigure}
+%     \caption{Overall figure caption}
+% \end{figure}
+%\subsection{Other topologies}
+
+\section{Future Recommendations} \label{sec:reccomendations}
+\subsection{Current-Source Rectifiers}
+Although not currently employed in electrolyzer applications, current-source rectifiers (CSRs) have the potential to serve as an optimal topology, offering numerous advantages \cite{iribarren_current_2024,solanki_highcurrent_2015}. They function as single-stage step-down rectifiers, delivering an output voltage comparable to that of a multi-pulse diode rectifier. As depicted in Fig. \ref{fig:csr} the circuit comprises IGBTs connected in series with diodes on each leg of the rectifier. The DC side inductance is necessary to ensure a steady DC output current, while capacitor filters $C_{\textrm{f}}$ on the AC side are employed to achieve sinusoidal grid currents. Furthermore, a freewheeling diode, $D_{\textrm{f}}$, is incorporated to prevent conduction losses during the zero state of the switching-cycle \cite{cass_improved_2008}. This design results in a power factor and harmonic content comparable to that of VSRs. The control strategy is analogous to that of VSRs, with the required parameters inverted to align with the characteristics.
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{current-source-rectifier.pdf_tex}
+    \vspace{0.3Em}
+    \caption{Current source rectifier}
+    \label{fig:csr}
+\end{figure}
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{12-pulse-thyristor-igbt-parallel-bridge.pdf_tex}
+    \vspace{0.3Em}
+    \caption{Combined six-pulse thyristor and pwm-based rectifier}
+    \label{fig:combined-thyristor-pwm-rectifier}
+\end{figure}
+
+The inclusion of the freewheeling diode in the circuit introduces certain limitations, as it restricts the phase difference between the input phase currents and voltages to a range of $\pm 30^{\circ}$. Although this does not pose an issue during nominal operation of the electrolyzer, it presents challenges in maintaining unity power factor during partial-load conditions \cite{iribarren_current_2024}. A line-frequency transformer is typically required to ensure galvanic isolation between the electrolyzer and the grid as well as lower the DC output voltage, as shown in Fig. \ref{fig:csr}, which can add losses and make the setup bulky \cite{solanki_highcurrent_2015}.
+
+Overall, employing high-frequency switching IGBTs allows for a substantial reduction in the size of passive filters on both the AC and DC sides, enhancing the AC-side power factor, particularly under low-load conditions for the electrolyzer. These benefits make IGBT-based CSRs an efficient choice for high-power industrial electrolyzer applications. 
+
+\subsection{Combined Thyristor and Pulse Width Modulation (PWM)-based Rectifiers}
+Rectifier topologies that combine a thyristor rectifier operating in parallel with a PWM-based converter can be used for high-current, low-voltage applications, such as electrolyzers \cite{siemens_water_electrolysis_2023, bintz_parallel_rectifier_2018}. As shown in Fig. \ref{fig:combined-thyristor-pwm-rectifier}, a phase-shift transformer is necessary to create a $30^{\circ}$ phase difference between the thyristor rectifier stage and the IGBT-based stage. The number of pulses in the thyristor stage can be increased to accommodate higher current requirements. The thyristor rectifier is designed to handle 80\% of the total current under the proposed configuration, while the PWM-based converter acts as the harmonic suppressor by providing required reactive power. This distribution ensures efficient operation by leveraging the high current-handling capacity of the thyristor rectifier, while the remaining 20\% is managed by the PWM-based converter, allowing for better control.
+
+Despite the mentioned advantages, there is insufficient evidence to conclusively demonstrate the effectiveness of such topologies for electrolyzer setups of multi-MW range. Dimensioning plays a critical role in such topologies to ensure minimal power flow through the PWM converter stage. Proper protection mechanisms are essential for the PWM stage, as excessive current can damage the entire section and lead to system malfunctions. Further experimental studies are necessary to better understand the behavior of the setup during partial-load operation of the electrolyzer, as well as its interaction with weak grids. Additionally, control techniques need to be explored and developed to facilitate smoother power distribution between the rectifier and the converter units, ensuring improved efficiency and reliability in diverse operational scenarios.
+
+
+\subsection{Vienna Rectifier with Synchronous Buck Converter}
+The Vienna rectifier is a unidirectional rectifier designed to compensate for reactive power and enhance the power factor on the grid side \cite{floricau_new_2013}. By improving power quality and minimizing harmonic distortion, this rectifier is particularly well-suited for high-current applications. As pictured in Fig. \ref{fig:vienna-rectifier}, it employs three IGBT switches to convert AC voltage into a stabilized DC voltage. A DC-DC buck converter is connected in series to regulate power delivery to the electrolyzer, allowing the system to function in two distinct modes: hydrogen production mode, where it operates while connected to the grid, and power demand mode, where it has the capability to operate independently of the grid \cite{monroy-morales_modeling_2016}. Both components can be independently controlled, providing flexibility in system operation.
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{vienna-rectifier.pdf_tex}
+    \vspace{0.3Em}
+    \caption{Vienna rectifier with a synchronous buck converter}
+    \label{fig:vienna-rectifier}
+\end{figure}
+
+A Vienna rectifier exhibit behavior closely resembling that of a T-type converter with reduced number of active switches \cite{molligoda_analysis_2018}. Their control algorithm typically relies on a rotating reference frame synchronized with the grid voltage vector angle, which is determined using a phase-locked loop. In the synchronous buck converter, a power MOSFET is used in place of a commutating diode in the lower leg, featuring a low on-state voltage to enhance efficiency \cite{monroy-morales_modeling_2016}.
+
+However, a phase displacement between the input current and voltage can cause the Vienna rectifier to generate voltage pulses of opposite polarity when the reference voltage and current have differing signs \cite{monroy-morales_modeling_2016}. This mismatch ultimately leads to low-frequency distortion in both the grid current and the DC output, potentially compromising system performance and stability. To address this issue, corrective measures can be implemented on the control side. Overall, such a system offers several advantages for powering electrolyzers, including reduced conduction and switching losses, as well as an improved ability to maintain a stable power factor for the grid.
+
+\section{Conclusion} \label{sec:conclusion}
+This paper has explored the critical role of power electronics rectifiers in advancing the green hydrogen sector. These rectifiers play a pivotal role in ensuring efficient and reliable power delivery to electrolyzers, which are essential for hydrogen production. Semiconductor-based power supplies must address several key factors, including minimizing energy losses, maintaining power quality, and ensuring stable operation under varying load and grid conditions. Additionally, considerations such as system scalability, cost-effectiveness, and the ability to adapt to grid conditions are vital for their successful integration into large-scale hydrogen production systems. VSRs are considered the most suitable for such applications due to their output characteristics and controllability. However, the limitations of IGBTs during high-current operations restrict their use without substantial parallelization of the switches. As a result, industries are increasingly adopting multipulse diode and thyristor rectifiers, which offer significantly higher current tolerance. However, these topologies consume substantial amount of reactive power and introduce considerable harmonic distortions to both the AC and DC sides. Experimental studies suggest that high-frequency, low-amplitude ripples in the output current have a minimal impact on electrolyzer performance. Therefore, the sizing of the DC-side inductance can be optimized and reduced. However, the same does not hold true for the AC side, as the harmonic injection makes these rectifiers unsuitable for direct grid connection. Therefore, additional filtering is necessary to improve the power factor and compensate for reactive power. The addition of separate filtering components increases the overall bulk of the circuit, escalates costs, and compromises the system's reliability. As a result, alternative configurations are being actively explored and considered for use as power supplies. Few recommendations from the literature have been reviewed, highlighting their respective advantages and limitations. Future work may focus on optimizing these configurations to balance performance, cost, and reliability while ensuring compatibility with grid standards and electrolyzer operational demands.
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,main-bib}
+
+\end{document}

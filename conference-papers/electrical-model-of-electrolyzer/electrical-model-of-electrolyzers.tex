@@ -1,0 +1,779 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{gensymb}
+\usepackage[version=4]{mhchem}
+\usepackage{cleveref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{svg}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{adjustbox}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    % numbers=left,                    
+    % numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+\title{Electrical Modeling of Electrolyzers}
+%\thanks{Identify applicable funding agency here. If none, delete this.}
+
+\author{\IEEEauthorblockN{Ushnish Chowdhury}
+    \IEEEauthorblockA{\textit{Department of Electrical Engineering and Automation} \\
+        \textit{Aalto University, Finland} \\
+        ushnish.chowdhury@aalto.fi}
+}
+
+\maketitle
+
+\begin{abstract}
+This paper introduces a comprehensive electrical model tailored for water electrolyzers. The proposed model captures the temperature and pressure-dependent characteristics of these electrochemical devices, while also accounting for nonlinearities arising from irreversible overvoltage losses and dynamic, capacitive behavior associated with the double-layer effect. Additionally, the frequency response of the model is analyzed to facilitate the linearization of the electrolyzer's overall impedance. Finally, simulation results are presented to evaluate the model's applicability in representing the operational behavior of electrolyzers.
+\end{abstract} \vspace{0.5Em}
+
+\begin{IEEEkeywords}
+    Water electrolyzers, electrical modeling, linearization, renewable energy
+\end{IEEEkeywords}
+
+\section{Introduction} \label{sec:introduction}
+% \IEEEPARstart{H}{\lowercase{ydrogen}} is regarded as a crucial component in the replacement of fossil fuels and the transition to renewable energy sources (RES) \cite{noauthor_green_2020, irena_green_hydrogen_2024, eu_hydrogen_strategy}. Its versatility allows it to be used in various applications, thereby reducing carbon dioxide emissions and dependence on non-renewable resources. Carbon-free power generation primarily depends on renewable resources such as solar and wind energy, which are inherently intermittent. This intermittency leads to a gap between energy generation and consumption, requiring substantial reliance on energy storage systems to ensure a stable and reliable power supply. These characteristics make them challenging to integrate into high-power consuming applications, such as long-distance transportation modes like airplanes and shipping, as well as industrial processes such as steel production, ammonia synthesis, and fertilizer manufacturing \cite{GRIGORIEV202026036}. Green hydrogen can serve a pivotal role as an efficient energy carrier in this context, offering a clean alternative to conventional fuels \cite{balat_potential_2008, Rohith_hydrogen_2016}.
+%Such situations underscore the importance of developing energy storage systems, where hydrogen can play a pivotal role.%
+
+%As the world seeks to address climate change and achieve energy security,
+%hydrogen's role becomes increasingly significant in facilitating a more resilient and eco-friendly
+%energy landscape.
+
+% Hydrogen production is categorized into different types based on the processes and raw materials 
+% used, with grey, blue, and green hydrogen being the most commonly produced. 
+\IEEEPARstart{H}{\lowercase{ydrogen}} serves as a highly efficient energy carrier, particularly in energy-intensive sectors that are hard to electrify \cite{irena_green_hydrogen_2024, eu_hydrogen_strategy}. These include long-distance transportation modes such as aviation and maritime shipping, as well as industrial processes like steel manufacturing and glass production. Hydrogen also plays a crucial role as a key feedstock in various chemical synthesis processes, including the production of ammonia and methane, which are fundamental to numerous industrial applications. For instance, ammonia is widely utilized in the manufacture of fertilizers essential for modern agriculture, while methane derivatives serve as precursors in the production of soaps, detergents, and other chemical products. Beyond these, hydrogen's role extends to the synthesis of methanol and other chemicals that form the backbone of industries such as pharmaceuticals, plastics, and textiles. However, 99\% of hydrogen production currently relies on processes such as steam methane reforming and natural gas reforming, both of which contribute significantly to carbon emissions \cite{irena_green_hydrogen_2024, folger_hydrogen_hubs, european_commission_joint_research_centre_clean_2023}. It is, therefore, crucial to explore alternative approaches for hydrogen production that minimize carbon emissions.
+
+Green hydrogen technology has been recognized as a viable alternative capable of producing hydrogen with a zero-carbon footprint across all phases of its production process. The methodology uses electrochemical devices called electrolyzers, employ electricity generated from renewable energy sources to split water molecules into hydrogen (\ce{H_2}) and oxygen without producing emissions at any stage. Recognizing the advantages of green hydrogen, international organizations and governing bodies are formulating strategies to transition away from the predominantly used methods of hydrogen production \cite{noauthor_green_2020, irena_green_hydrogen_2024}. The European Union, for example, has exhibited a strong commitment in advancing green hydrogen as a key element in its energy transition strategy, with the objective to scale up production up to 10 million tonnes by the start of 2030 \cite{eu_hydrogen_strategy}.
+
+% The basic concept of decomposing water using electrolytic cells was introduced two centuries ago by
+% van Troostwijk and Deiman \cite{SMOLINKA202283}. The pioneering work laid the foundation for 
+% developing modern electrolysis technologies, which have since evolved significantly through the hands 
+% of Alessandro Volta, Johann Wilhelm Ritter, and Charles Renard. There are various commercially available 
+% water electrolysis technologies, differentiated by the type of electrolyte used: alkaline water 
+% electrolysis (AWE), proton exchange membrane water electrolysis (PEMWE), solid oxide water 
+% electrolysis (SOWE) and anion exchange membrane water electrolysis (AEMWE) \cite{Iribarran2023Dynamic}. 
+% AWE is the most established and widely commercialized process for large-scale hydrogen production, 
+% characterized for its cost effectiveness and reliability \cite{schnuelle_dynamic_2020}. PEMWE is 
+% emerging as a promising technology, offering higher efficiency, higher pressure tolerance, and the 
+% ability to produce hydrogen with a purity level of 99.99 \% \cite{BUTTLER20182440}. SOWE and AEMWE 
+% are still under active research and development. Efforts are focused on addressing challenges related to 
+% material durability, scalibilty, and stability \cite{GRIGORIEV202026036}. As a result, these 
+% technologies are not yet considered viable for commercial use. 
+
+As electrolyzers emerge as key enablers in the global effort to reduce carbon emissions, it is essential to thoroughly understand their electrical behavior to ensure effective integration into the grid. Electrolyzers, being electrochemical devices, nonlinear and dynamic characteristics that should be accounted for under varying operational conditions, such as fluctuations in temperature, pressure, and current \cite{puranen_using_2024, Iribarran2023Dynamic, URSUA201218598, koponen_effect_of_converter_2019, JARVINEN202231985}. A comprehensive electrical model is, therefore, crucial in capturing these phenomena and also enables the linearization of the system for specific conditions required for integrating them to the power grid.
+
+The paper begins by providing an overview of the fundamentals of water electrolysis and the various types of electrolyzers in Section \ref{sec:water-electrolysis-basics}. Section \ref{sec:electrical-modeling} introduces the proposed electrical model, with a detailed explanation of each component to illustrate the behavior of an electrolyzer. In Section \ref{sec:linearized-model}, the focus shifts to linearizing the overall electrolyzer impedance to facilitate further analysis. Finally, simulation results obtained using PLECS are presented and compared with findings from referenced literature as a proof of validation for the model.
+% The primary objective of this study is to develop and assess a static-dynamic electrical model applicable to both alkaline and proton-exchange membrane (PEM) 
+% electrolyzers, describing their characteristics when supplied with ideal electrical power sources.
+
+%This early discovery marked the 
+%beginning of a worldwide interest that persists today with the implementation of ambitious environmental 
+%mitigation programs and the increasing integration of RESs.
+
+% Papers focusing on coupling the electrical and chemical domains 
+% characterize electrical modeling into three approaches, analytical, empirical and mechanistic 
+% approaches \cite{JARVINEN202231985}.
+
+% The contributions of this paper can be summarized as follows:
+% \begin{itemize}
+%     \item The paper begins by outlining the fundamental principles of electrolysis, providing a brief 
+%     introduction to its chemical and thermodynamical properties, and how these factors contribute to 
+%     the resulting electrical behavior.
+%     \item  It then develops an equivalent electrical circuit that represents various static and 
+%     dynamic phenomena, explained through appropriate equations.
+%     \item  The proposed electrical model is validated by implementing it in PLECS, a software convenient 
+%     for simulating electrical, thermal and magnetic circuits \cite{plecs_2018}. Model parameters for an 
+%     alkaline electrolyzer and a PEM electrolyzer have been obtained from \cite{Iribarran2023Dynamic} and 
+%     \cite{puranen_using_2024} respectively. 
+% \end{itemize}
+
+% This shift aims to meet energy demands with a reduced 
+% carbon footprint across various sectors, including the transportation and industrial processes such 
+% as steel production, as well as chemical production of ammonia, methanol, and other products. 
+
+% With ongoing research to improve efficiency, green hydrogen
+% powered fuel cells offer several advantages, like longer lifespans, and higher energy densities, when
+% compared to lithium-ion batteries, showcasing the technology's potential to serve as an alternative to
+% lithium-ion batteries, which face recycling challenges \cite{9326669}.
+\section{Basics of water electrolysis} \label{sec:water-electrolysis-basics}
+Water electrolysis is the process involving the application of an electric current, which facilitates the separation of water into its gaseous products through redox reactions at the two electrodes (anode and cathode), thereby enabling the efficient production of these gases. The general process has been depicted in Fig. \ref{fig:general-electrolyzer}. The fundamental chemical reaction governing electrolysis is
+\begin{align}
+    \ce{H_2O(l) -> H_2(g) + 1/2O_2(g)} \label{eq:el-main}
+\end{align}
+Electrolysis is further distinguished based on the type of electrolyte used, which modifies the 
+half-cell reactions at each electrode. Alkaline water electrolysis (AWE) utilizes an alkaline solution consisting water and potassium hydroxide or sodium hydroxide, facilitating the movement 
+of hydroxide ions.
+\begin{align*}  
+    \ce{2H_2O(l) + 2e^- &<--> H_2(g) + 2OH^-(aq)} \tag{2a}  \\  
+        &\hspace{2.75cm} \text{reduction at cathode} \\[2px]
+    \ce{2OH^-(aq) + 2e^- &<--> 1/2O_2(g) + H_2O(l) + 2e^-} \tag{2b} \\
+        &\hspace{2.75cm} \text{oxidation at anode} 
+\end{align*}
+A proton membrane exchange water electrolysis (PEMWE) system employs a solid polymer electrolyte (typically perfluoroalkylsulfonic acid \cite{corti_polymer_2022}) 
+which allows proton transport, separates the gaseous products, and provides a layer of insulation 
+for the electrodes. The solution used for this process contains minimal impurities, 
+thus generating purer \ce{H_2} gas when compared to AWE.
+\begin{align*}
+    &\ce{2H^+(aq) + 2e^- <--> H_2(g)} \tag{3a}  \\  
+    &\hspace{4.5cm} \textrm{reduction at cathode} \\[2px]
+    &\ce{H_2O(l) <--> 1/2O_2(g) + 2H^+(aq) + 2e^-} \tag{3b} \\
+    &\hspace{4.5cm} \textrm{oxidation at anode}
+\end{align*} \setcounter{equation}{3}
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{0.9\linewidth}
+    \input{general_electrolyzer.pdf_tex}
+    \caption{General water electrolysis.}
+    \label{fig:general-electrolyzer}
+\end{figure}
+While PEMWE offers significant advantages in efficiency and produces hydrogen of higher purity and 
+compact stack size, the overall costs associated with developing and maintaining a PEMWE system are 
+considerable. This high expense is primarily due to the reliance on precious metals, including 
+platinum and iridium, for the catalyst layers, along with nickel for additional system components 
+\cite{SHIVAKUMAR2019442}. Ultimately, the decision between AWE and PEMWE for large-scale hydrogen production will depend on the specific requirements and constraints of the particular application.
+
+Other electrolysis methods, such as solid-oxide water electrolysis and anion exchange membrane water 
+electrolysis, are currently subjects of active research and development. Efforts are focused on 
+optimizing these technologies to achieve more favorable and practical operating conditions 
+\cite{ELSHAFIE2023101426}. Since these technologies have not yet reached commercialization and remain 
+largely in the research and development phase, unlike the more established AWE and PEMWE, they are 
+excluded from this study.
+
+\section{Electrical model of electrolyzers} \label{sec:electrical-modeling}
+The operational principles of electrolyzers are grounded in Faraday's first law of electrolysis, which states that the amount of chemical change at the electrode-electrolyte interface is directly proportional to the amount of electricity passed through the system \cite{JARVINEN202231985}.
+\begin{align}
+    \dfrac{dn_{\ce{H_2}}}{dt} = \eta\dfrac{jA}{n_{\textrm{e}}F} 
+    = \eta\dfrac{i_{\textrm{E}}}{n_{\textrm{e}}F} 
+    \label{eq:thermodynamic-efficiency}
+\end{align}
+where $\frac{dn_{\ce{H_2}}}{dt}$ is the rate of production of hydrogen molecules, $\eta$ is the 
+efficiency of the supplied current, $j$ is the current density, $A$ is the active surface area, 
+$i_{\textrm{E}} = jA$, is the current flowing through the electrolyzer, $n_{\textrm{e}}$ refers to the 
+number of electrons involved in the production of a single hydrogen molecule, which is always 
+two incase of water electrolysis and $F = 9.65\cdot10^4 \ \textrm{C/mol}$ is the Faraday's constant.
+
+In real-world systems, the efficiency, $\eta$ is rarely unity and is reduced by factors such as stray currents and nonlinearities resulting from gas crossover through the gas separator \cite{JARVINEN202231985}. An overall voltage can be determined by considering the various phenomena occurring within an electrolyzer, including these nonlinearities and losses \cite{koponen_effect_of_converter_2019, Iribarran2023Dynamic, JARVINEN202231985, puranen_using_2024, URSUA201218598}.
+\begin{equation}
+    u_{\textrm{E}} = u_{\textrm{rev}} + u_{\textrm{ohm}} + u_{\textrm{act}} 
+    \label{eq:electrolyzer-total-voltage}
+\end{equation}
+where $u_{\textrm{rev}}$ is the reversible voltage, the minimum voltage required to initiate
+the electrolysis process, $u_{\textrm{ohm}}$ refers to the ohmic losses in each cell, and 
+$u_{\textrm{act}}$ is the overall activation voltage produced due to kinetic losses in both cathode 
+and anode. All terms have been elaborated upon in the subsequent subsections \ref{subsec:rev-voltage}, \ref{subsec:ohmic-voltage} and \ref{subsec:activation-overvoltage}. Fig. \ref{fig:static-dynamic-electrical-model} shows the comprehensive equivalent electrical circuit for alkaline or proton exchange membrane (PEM) electrolyzers is modelled by incorporating all phenomena outlined in \eqref{eq:electrolyzer-total-voltage}, including the various resistive and capacitive components that represent the electrochemical reactions.
+
+% Concentration losses arise when the rate of mass transport of a species to or from the electrode 
+% restricts the generation of current, typically occurring at high current densities \cite{OGUZKOROGLU2019565}. Both alkaline and PEM electrolyzers exhibit higher efficiencies at lower current densities. Commercial alkaline electrolyzers typically operate at around $0.2 \textrm{-} 0.8 \ \textrm{A}\cdot \textrm{cm}^{-2}$ 
+% \cite{Iribarran2023Dynamic} and PEM electrolyzers operate at $1 \textrm{-} 3 \ \textrm{A}\cdot \textrm{cm}^{-2}$ 
+% \cite{LEE2020100147}. Hence, the overvoltage, $u_{\textrm{con}}$ is not considered a factor contributing 
+% to energy loss in electrolyzers and is not included in this study.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \def\svgwidth{0.6\linewidth}
+%     \input{simple_electrical_model_electrolyzer.pdf_tex}
+%     \caption{Electrical equivalent circuit of an electrolyzer stack.}
+%     \label{fig:simple-electrical-model}
+% \end{figure}
+
+% Electrolyzer characteristics are influenced by various operating conditions, such as temperature $T$ 
+% and pressure $p$, which can significantly affect the efficiency and performance. The simplest 
+% electrical model of an electrolyzer stack assumes operation under constant $T$ and $p$,
+% resulting $u_{\textrm{rev}}$ to be constant. An overvoltage is generated due to the $i_{\textrm{E}}$, 
+% assuming the stack impedance to be purely resistive, $R_{\textrm{E}}$ \cite{koponen_effect_of_converter_2019}. Such a 
+% system will comprise of a constant DC voltage source representing $u_{\textrm{rev}}$ and a low-value
+% resistor as shown in figure \ref{fig:simple-electrical-model}.
+% \begin{align} \label{eq:simplest-equation}
+%     u_{\textrm{E}} = u_{\textrm{rev, E}} + R_{\textrm{E}}i_{\textrm{E}}
+% \end{align}
+
+% A comprehensive equivalent electrical circuit for 
+% alkaline or proton exchange membrane (PEM) electrolyzers is modelled by incorporating all phenomena 
+% outlined in Equation \ref{eq:electrolyzer-total-voltage}, including the various resistive and capacitive components that represent the electrochemical reactions. 
+%The model, illustrated in the figure \ref{fig:static-dynamic-electrical-model}, is capable of capturing 
+% both the static and dynamic behavior of the electrolyzers, as well as the nonlinearities in 
+% the voltage-current relationship at different operating conditions like, temperature, pressure and 
+% supplied current.
+
+\subsection{Reversible voltage}\label{subsec:rev-voltage}
+The reversible voltage, $u_{\textrm{rev}}$, in electrolysis, refers to the theoretical voltage at which an electrochemical reaction proceeds with no energy losses. In this ideal scenario, the system operates with perfect thermodynamic efficiency, characterized by zero entropy generation and the complete conversion of energy without any dissipation.
+% %It can be represented as
+% \begin{align}
+%     \begin{split}
+%         u_{\textrm{rev}} &= \dfrac{\Delta G}{n_{\textrm{e}}F} \label{eq:thermodynamic-rev-voltage} \\[5px]
+%         &\textrm{where} \, \Delta G = \Delta H - T \Delta S
+%     \end{split}    
+% \end{align}
+% The term $\Delta G$ is the Gibbs free energy, which is proportional to the 
+% enthalpy change $\Delta H$ and entropy change $\Delta S$ of the process at a certain temperature $T$.
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{\linewidth}
+    \input{static-dynamic-model-electrolyzer.pdf_tex}
+    \caption{Electrical equivalent circuit of an electrolyzer stack.}
+    \label{fig:static-dynamic-electrical-model}
+\end{figure}
+The total reversible voltage in a electrolyzer cell is calculated by combining the half reactions at
+both electrodes
+\begin{align}
+    u_{\textrm{rev}} & = u_{\textrm{rev,an}} - u_{\textrm{rev,ca}}
+    \label{eq:reversible-voltage-combo}
+\end{align}
+where subscripts $\textrm{an}$ and $\textrm{ca}$ represent anode and cathode respectively. 
+The reversible voltage for both electrodes are therefore obtained through the implementation of Nerst equation.
+\begin{align}
+    u_{\textrm{rev,an}} &= {u^0_{\textrm{rev,an}}} + f(T)\ln{\dfrac{a^{1/2}_{\ce{O_2}}a^2_{\ce{H^+}}}
+    {a_{\ce{H_2O}}}} \tag{8a} \\
+    u_{\textrm{rev,ca}} &= {u^0_{\textrm{rev,ca}}} + f(T)\ln{\dfrac{a^2_{\ce{H^+}}}{a_{\ce{H_2}}}} \label{eq:pme-cathodic} \tag{8b} \\
+    f(T) &= \dfrac{\bar{R}T}{n_{\textrm{e}}F} \tag{8c}
+\end{align} \setcounter{equation}{8}
+where $\bar{R} = 8.314 \ \textrm{J} \textrm{mol}^{-1} \textrm{K}^{-1}$ 
+is the universal gas constant and $a_{\ce{O_2}}$, $a_{\ce{H_2O}}$, $a_{\ce{H^+}}$ and $a_{\ce{H_2}}$ are the specific activities of the chemical reagents. The parameter $u^0_{\textrm{rev,\textrm{an}}}$ and $u^0_{\textrm{rev,\textrm{ca}}}$ are the initial reversible voltage at standard pressure 
+($1 \, \textrm{bar}$) as a function of temperature at both anode and cathode respectively. 
+% The function $f(T)$ is a term used to representing the following parameter:
+% \begin{equation} \label{eq:rev-voltage-func}
+%     f(T) = \dfrac{\bar{R}T}{n_{\textrm{e}}F}
+% \end{equation}
+%For PEMWE, the hydrogen evolution reaction on the cathode \ref{eq:pme-cathodic} is zero.
+The overall reaction is
+\begin{equation}
+    u_{\textrm{rev}} = {u^0_{\textrm{rev}}} + f(T)\ln{\dfrac{a^2_{\ce{H_2}}a^{1/2}_{\ce{O_2}}}
+    {a_{\ce{H_2O}}}} \label{eq:rev-voltage}
+\end{equation}
+% Despite of having equal overall $u_{\textrm{rev}}$, the half reactions at the electrodes for an 
+% AWE process differ from PEMWE, leading to different standard voltages ${u^0_\textrm{a}}$ and 
+% ${u^0_\textrm{c}}$.
+
+% In literature \cite{Schalenbach_2016, schalenbach_proton_2018, HAMMOUDI201213895, DALE20081348, 
+% 5347619, LeRoy_1980}, 
+The standard reversible voltage $u^0_{\textrm{rev}}$ has been derived utilizing various linear and polynomial approximations, and experimental equations. 
+% (shown in figure \ref{fig:standard-reversible-voltage-equations}). 
+All of the equations exhibit minimal differences in output when operated within
+the designated temperature range \cite{JARVINEN202231985}. The activity of an ideal gas can be thermodynamically defined as a measure of the effective concentration of a species within a mixture. It is therefore expressed as a ratio of the partial pressure of the gas to a reference pressure, commonly selected as $p^0 = 1 \, \textrm{bar}$. 
+
+% \begin{figure}[htbp]
+%     \centering
+%     \def\svgwidth{\linewidth}
+%     \input{standard_rev_voltage.pdf_tex}
+%     \caption{Standard reversible voltage equations used for obtaining $u_{\textrm{rev}}$ in AWE and PEMWE.}
+%     \label{fig:standard-reversible-voltage-equations}
+% \end{figure}
+
+% \begin{align} \label{eq:std-rev-voltage-Schalenbach-1}
+%     \begin{split}
+%         u^o_{rev} & = 1.229 V - (8.46\times10^{-4}VK^{-1}) \\
+%                   & \qquad (T - 298.15)
+%     \end{split}
+% \end{align}
+% \begin{align} \label{eq:std-rev-voltage-Schalenbach-2}
+%     \begin{split}
+%         u^o_{rev} & = \dfrac{1}{n_{e}F} [ (-159.6 J mol^{-1} K^{-1})T \\
+%                   & \qquad + 2.8472\times 10^5 J mol^{-1} ]
+%     \end{split}
+% \end{align}
+% \begin{align} \label{eq:std-rev-voltage-hammoudi}
+%     \begin{split}
+%         u^o_{rev} & = 1.50342V - (9.956\times 10^{-4} VK^{-1})T \\
+%                   & \qquad + (2.5\times 10^{-7} VK^{-2})T^2
+%     \end{split}
+% \end{align}
+% \begin{align} \label{eq:std-rev-voltage-dale}
+%     \begin{split}
+%         u^o_{rev} & = 1.5241V - 1.2261\times 10^{-3}T    \\
+%                   & \qquad + 1.1858\times 10^{-5}T\ln{T} \\
+%                   & \qquad + 5.6692\times 10^{-7}T^2 (V)
+%     \end{split}
+% \end{align}
+% \begin{align}\label{eq:std-rev-voltage-lopes}
+%     \begin{split}
+%         u^o_{rev} & = 1.449V - (6.139\times 10^{-4} VK^{-1})T \\
+%                   & \qquad - (4.592\times 10^{-7} VK^{-1})T^2 \\
+%                   & \qquad + (1.46\times 10^{-10} VK^{-1})T^3
+%     \end{split}
+% \end{align}
+% \begin{align}\label{eq:std-rev-voltage-leroy}
+%     \begin{split}
+%         u^o_{rev} & = 1.5184V - 1.5421\times 10^{-3}T           \\
+%                   & \qquad + 9.523\times 10^{-5} VK^{-1}T\ln{T} \\
+%                   & \qquad + 9.84\times 10^{-8}T^2
+%     \end{split}
+% \end{align}
+
+
+
+% For an AWE system, the water activity is calculated by:
+% \begin{equation} \label{eq:awe-water-activity}
+%     a_{\ce{H_2O}} = \dfrac{p_{\textrm{sv,el}}(T, m)}{p_{\textrm{sv}}(T)}
+% \end{equation}
+% where $p_{\textrm{sv,el}}(T, m)$ is the electrolyte saturated water vapour pressure as a function of temperature, 
+% $T$ and electrolyte molality, $m$. The pressure $p_{\textrm{sv}}$ is the saturated vapour pressure of pure water. 
+% On the other hand for a PEMWE system, the water activity is considered to be unity \cite{HAN20157006}.
+
+% The partial pressure of hydrogen and oxygen are obtained.
+% \begin{align}
+%     p_{\ce{H_2}} = p_{\textrm{ca}} - p_{\textrm{sv}}(T) \tag{11a} \\  
+%     p_{\ce{O_2}} = p_{\textrm{an}} - p_{\textrm{sv}}(T) \tag{11b}
+% \end{align} \setcounter{equation}{11}
+% where $p_{\textrm{\textrm{i}}}$ is the measured pressure in an electrode, 
+% subscript i representing either anode or cathode. On the contrary, in an AWE system, the partial pressures of the gases are assumed to be equal \cite{JARVINEN202231985}.
+% \begin{equation} \label{eq:p-awe}
+%     p_{\ce{H_2}} = p_{\ce{O_2}} = p - p_{\textrm{sv, el}}(T, m)
+% \end{equation}
+% The saturated vapour pressure of water is calculated within a temperature range of $1 \, \degree \textrm{C}$ to $100 \, \degree \textrm{C}$ and associated parameters 
+% of electrolyte \cite{BALEJ1985233}.
+% \begin{align} \label{eq:sat-water-vapour-pressure-balej}
+%     \begin{split}
+%         \log_{10} p_{\textrm{sv}}(T) & = 35.4462 - \dfrac{3343.93 \, \textrm{K}}{T} \\
+%                 & \quad - 10.9 \log_{10}T + (4.1645\cdot10^{-3} \, \textrm{K}^{-1})T
+%     \end{split}
+% \end{align}
+
+% For a different temperature range, an alternative semi-empirical equation involving 
+% three parameters $A$, $B$, and $C$, which are derived for a specific temperature range of
+% the gas is used \cite{JARVINEN202231985}.
+% \begin{align} \label{eq:sat-water-vapour-pressure-antoine}
+%     \begin{split}
+%         \log_{10} p_{\textrm{sv}}(T) & = A - \dfrac{B}{T+C}
+%     \end{split}
+% \end{align}
+
+% The pressure $p_{\textrm{sv,E}}(T,m)$ for an AWE system is derived from $p_{sv}(T)$ using the
+% following equation (in bars) \cite{BALEJ1985233}:
+% \begin{align} \label{eq:sat-water-vapour-pressure-pure-water}
+%     \begin{split}
+%         p_{\textrm{sv,E}}(T,m) & = 10^{\textrm{a}}p_{\textrm{sv}}(T)^{\textrm{b}}
+%     \end{split}
+% \end{align}
+
+% \ce{KOH} and \ce{NaOH} are the most common electrolytes used for AWE systems.
+% Parameters $\textrm{a}$ and $\textrm{b}$ are derived accordingly using the molality, 
+% $m$ \cite{JARVINEN202231985}. For an AWE system with \ce{KOH} electrolyte the parameters 
+% are derived as follows:
+After applying all of the mentioned equations, the final reversible voltage for an alkaline electrolyzer becomes
+\begin{align}
+    u_{\textrm{rev}} &= u^0_{\textrm{rev}} 
+    + f(T)\ln{\dfrac{(p - p_{\textrm{sv,el}}(T,m))^{3/2}p_{\textrm{sv}}(T)}{(p^{0})^{3/2}p_{\textrm{sv,el}}(T,m)}} \label{awe-rev-voltage-eq} 
+\end{align}
+where $p$ is the system pressure, $p_{\textrm{sv}}$ is the saturated vapour pressure of water and $p_{\textrm{sv,el}}$ is the saturated vapour pressure of the electrolyte, dependent on temperature and molality.
+
+In contrast to alkaline electrolyzers, the pressures at the two electrodes in a PEM electrolyzer are not equal and must therefore be accounted for separately in the reversible voltage equation.
+\begin{align}
+    u_{\textrm{rev}} &= u^0_{\textrm{rev}} 
+    + f(T)\ln{\dfrac{(p_{\textrm{ca}} - p_{\textrm{sv}}(T))(p_{\textrm{an}} - p_{\textrm{sv}}(T))^{1/2}}{(p^{0})^{3/2}}} \label{pemwe-rev-voltage-eq} 
+\end{align}
+where $p_{\textrm{an}}$ and $p_{\textrm{ca}}$ are pressure of the anode and cathode respectively.
+
+Although Equations \eqref{awe-rev-voltage-eq} and \eqref{pemwe-rev-voltage-eq} differ significantly, both yield a reversible voltage value o $1.229 \, \textrm{V}$ under standard conditions of  $25 \, \degree \textrm{C}$ and $1 \, \textrm{bar}$ pressure \cite{URSUA201218598, Iribarran2023Dynamic, JARVINEN202231985}. As shown in Fig. \ref{fig:static-dynamic-electrical-model}, the reversible voltage can be modeled to be voltage source dependent on operating temperature and pressure.
+
+% Hence, the reversible voltage, $u_{\textrm{rev}}$ can be modeled to be a
+% $T$ and $p$ dependent voltage source having a value of 
+% $1.229 \, \textrm{V}$ under standard conditions of $25 \, \degree \textrm{C}$
+% and $1 \, \textrm{bar}$ pressure \cite{URSUA201218598, Iribarran2023Dynamic}.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \def\svgwidth{\linewidth}
+%     \input{a_b_parameters.pdf_tex}
+%     \caption{Standard reversible voltage equations used for obtaining $u_{\textrm{rev}}$ in AWE and PEMWE.}
+%     \label{fig:standard-reversible-voltage-equation}
+% \end{figure}
+
+% \begin{align} \label{eq:sat-water-vapour-pressure-pure-water-param-a-koh}
+%     \begin{split}
+%         \textrm{a} & = -0.0151m              \\
+%           & \qquad - 1.6788\times10^{-3}m^2 \\
+%           & \qquad + 2.2588\times10^{-5}m^3
+%     \end{split}
+% \end{align}
+% \begin{align} \label{eq:sat-water-vapour-pressure-pure-water-param-b-koh}
+%     \begin{split}
+%         \textrm{b} & = 1 - 1.2062\times10^{-3}m  \\
+%           & \qquad + 5.6024\times10^{-4}m^2 \\
+%           & \qquad - 7.8228\times10^{-6}m^3
+%     \end{split}
+% \end{align}
+
+% While for an AWE system with \ce{NaOH} electrolyte the equations are:  
+% \begin{align} \label{eq:sat-water-vapour-pressure-pure-water-param-a-naoh}
+%     \begin{split}
+%         \textrm{a} & = -0.0109m                      \\
+%           & \qquad - 1.4610\times10^{-3}m^2 \\
+%           & \qquad + 2.0353\times10^{-5}m^3
+%     \end{split}
+% \end{align}
+% \begin{align} \label{eq:sat-water-vapour-pressure-pure-water-param-b-naoh}
+%     \begin{split}
+%         \textrm{b} & = 1 - 1.3414\times10^{-3}m      \\
+%           & \qquad + 7.0724\times10^{-4}m^2 \\
+%           & \qquad - 9.5362\times10^{-6}m^3
+%     \end{split}
+% \end{align}
+
+% \begin{figure}[htbp]
+%     \centering
+%     \def\svgwidth{0.55\linewidth}
+%     \input{reversible_voltage_equivalent_circuit.pdf_tex}
+%     \caption{Equivalent circuit of the reversible voltage of an electrolyzer stack,
+%     where $u_{rev, E} (T,p) = N_{s}u_{rev} (T,p)$ \cite{URSUA201218598}.}
+%     \label{fig:rev-voltage}
+% \end{figure}
+
+\subsection{Ohmic overvoltage}\label{subsec:ohmic-voltage}
+The flow of electrons and ions through the electrodes (anode and cathode), diaphragm,
+bipolar plates, and current collectors face resistance, resulting in the ohmic
+overvoltage, $u_{\textrm{ohm}}$ in the electrolyzer. The overvoltage 
+increases linearly following Ohm's law as the current flowing through the electrolyzer stack
+($i_\textrm{E}$) increases \cite{Iribarran2023Dynamic}. In Fig. \ref{fig:static-dynamic-electrical-model}, it is represented as a basic resistor.
+\begin{align} \label{eq:ohmic-overvoltage}
+    u_{\textrm{ohm}} & = i_{\textrm{E}} R_{\textrm{ohm}}
+\end{align}
+where $R_{\textrm{ohm}}$ is the total resistance for the electrolyzer stack.
+% which can be expressed as:
+% \begin{align} \label{eq:ohmic-overvoltage-electrolyzer-resistance}
+%     R_{\textrm{ohm,E}} & = N_{\textrm{s}} R_{\textrm{ohm}}
+% \end{align}
+The resistance is expressed as a function of the operating temperature.
+\begin{align} \label{eq:ohmic-overvoltage--cell-resistance}
+    R_{\textrm{ohm}} & = \dfrac{r}{A} \tag{13a} \\[5px]
+    r &= r_1 + r_2T + \dfrac{r_3}{T} + \dfrac{r_4}{T^2} \tag{13b} \label{eq:r-as-function-of-T}
+\end{align}\setcounter{equation}{13}
+where $r$ is the area-specific resistance of the cell and $A$ is the total surface area of the cell. The parameter $r$ is further segregated as shown in \eqref{eq:r-as-function-of-T} where $r_1$, $r_2$, $r_3$ and $r_4$ are experimentally derived parameters, with the latter three being temperature-dependent. The term $r_2$ represents the resistance encountered by electron movement due to various cell components, such as electrodes and bipolar plates. While $r_3$ and $r_4$ are the ionic resistance caused by the electrolyte and the diaphragm. Thus $R_{\textrm{ohm}}$ is inversely proportional to the temperature, exhibiting behavior that is contrary to that of a typical resistor. Increase in temperature therefore can positively influence the electrolyzer performance by reducing the ohmic losses. 
+
+% Therefore, the ohmic effects can be modelled as a variable resistance, which depends
+% on temperature, with $u_{\textrm{ohm}}$ being the voltage over the component in an
+% electric circuit. This model remains consistent for both static and dynamic scenarios,
+% as the relationship between current and resistance is linear.
+% \begin{figure}[htbp]
+%     \centering
+%     \def\svgwidth{0.6\linewidth}
+%     \input{ohmic_effects.pdf_tex}
+%     \caption{Equivalent circuit of ohmic overvoltage of an electrolyzer stack, 
+%     where $R_{ohm,E} = N_{s}R_{ohm}$ \cite{URSUA201218598}.}
+%     \label{fig:ohmic-voltage}
+% \end{figure}
+
+\subsection{Activation overvoltage and double-layer effect} \label{subsec:activation-overvoltage}
+Initialization of the formation of hydrogen and oxygen through the electrolysis process
+requires additional energy beyond the theoretical minimum reversible voltage
+necessary to overcome the energy barriers associated with the electrochemical reactions
+at the electrodes \cite{Iribarran2023Dynamic}. This additional energy accounts for the activation
+energy required to drive the reaction kinetics at the electrodes and the inherent
+inefficiencies present within the system \cite{URSUA201218598}. The overvoltage resulting
+from such a phenomenon is known as the activation overvoltage, $u_{\textrm{act}}$ which occurs in both
+electrodes. In Fig. \ref{fig:static-dynamic-electrical-model} it is presented as the voltage developed across the nonlinear resistors $R_{\textrm{act,an}}$ and $R_{\textrm{act,ca}}$.
+
+% The overvoltage $u_{\textrm{act}}$ is represented by the following equation \cite{Iribarran2023Dynamic, URSUA201218598,
+%     puranen_using_2024}.
+% \begin{align} \label{eq:butler-volmer-equation}
+%     \dfrac{i_{\textrm{E}}}{i^0_{\textrm{\textrm{i}}}} &=  \exp\left(\dfrac{\alpha n_{\textrm{e}}F}{\bar{R} T}
+%     u_{\textrm{\textrm{act,\textrm{i}}}}\right) 
+%     - \exp\left(\dfrac{(1-\alpha) n_{\textrm{e}}F}{\bar{R} T}u_{\textrm{\textrm{act,\textrm{i}}}}\right)
+% \end{align}
+% where $i^0_{\textrm{\textrm{i}}}$ is the equilibrium current in the electrodes, $\alpha$ is the charge transfer coefficient ($\alpha \in [0,1]$). Subscript i represents either of the electrodes. The first term of the equation accounts for the forward reaction and the second term accounts for the backward reaction \cite{JARVINEN202231985}. Consideration of various approximations at higher activation overpotential values modifies Equation \ref{eq:butler-volmer-equation} to \cite{Iribarran2023Dynamic, URSUA201218598, puranen_using_2024, JARVINEN202231985}
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{0.965\columnwidth}
+    \input{i-u-region.pdf_tex}
+    \caption{Example $i-u$ curve of an alkaline electrolyzer}
+    \label{fig:example-region-division}
+\end{figure}
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{iu-characteristics-electrolyzers.pdf_tex}
+    \caption{Example $i-u$ characteristics of an alkaline electrolyzer}
+    \label{fig:example-nonlinear-behavior}
+\end{figure}
+
+
+% The equation \ref{eq:butler-volmer-equation} can be simplified by considering
+% a number of approximations \cite{Iribarran2023Dynamic, URSUA201218598, puranen_using_2024, JARVINEN202231985}.
+% \begin{align} \label{eq:tafel-equation-act-voltage}
+%     u_{\textrm{act,\textrm{i}}} & = \dfrac{\bar{R}T}{\alpha n_{\textrm{e}}F} \ln{\dfrac{i_{\textrm{E}}}{i^0_{\textrm{i}}}}
+% \end{align}
+The overvoltage can be approximated and expressed in an exponential form, as described in \cite{Iribarran2023Dynamic, URSUA201218598, puranen_using_2024, JARVINEN202231985}.
+\begin{align} \label{eq:tafel-equation-act-voltage-current}
+    \dfrac{i_{\textrm{E}}}{i^0_{\textrm{\textrm{x}}}} &= \exp\left( \dfrac{\alpha n_{\textrm{e}}F}{\bar{R}T} u_{\textrm{act,\textrm{x}}} \right)
+\end{align}
+where $i^0_{\textrm{\textrm{x}}}$ is the equilibrium current in the electrodes, $\alpha$ is the charge transfer coefficient ($\alpha \in [0,1]$). Subscript x represents either of the electrodes.
+Equivalent reciprocal form can be derived where the current is the input and voltage the output.
+\begin{align} \label{eq:tafel-equation-act-voltage-voltage}
+    u_{\textrm{act,\textrm{x}}} & = \dfrac{\bar{R}T}{\alpha n_{\textrm{e}}F} \ln{\dfrac{i_{\textrm{E}}}{i^0_{\textrm{x}}}}
+\end{align}
+Further adjustments can be made to deduce the relation between the constant terms $\bar{R}$, $n_{\textrm{e}}$ and $F$ and the operating temperature in \eqref{eq:tafel-equation-act-voltage-voltage}, modifying it to
+\begin{align}
+    u_{\textrm{act,\textrm{i}}} &= s_{\textrm{x}}\ln\left( \dfrac{1}{t_\textrm{x}}i_{act,\textrm{x}}+1\right) \label{eq:tafel-equation-act-current}
+\end{align}
+where $s_{\textrm{x}}$ and $t_{\textrm{x}}$ are those parameters derived from experimental data related to the cathode and anode (denoted by the subscript $\textrm{x}$) during the activation process.
+The term $s_{\textrm{x}}$ directly influences the reaction rate as a function of temperature at the electrodes. A lower value of $s_{\textrm{x}}$, corresponds to reduced activation losses. The term $t_{\textrm{x}}$ is associated with the exchange currents at each electrode, and is inversely related to the activation losses, i.e. higher values of $t_{\textrm{x}}$ reduce the activation losses for each electrode.
+\begin{align}
+    s_{\textrm{x}} & = s_{1,\textrm{x}} + s_{2,\textrm{x}}T + s_{3,\textrm{x}}T^2 \tag{17a} \\[5px]
+    t_{\textrm{x}} & = t_{1,\textrm{x}} + t_{2,\textrm{x}}T + t_{3,\textrm{x}}T^2 \tag{17b}
+\end{align} \setcounter{equation}{17}    
+
+Thus, the overall activation overvoltage for the electrolyzer stack can be expressed as
+\begin{align} \label{eq:activation-voltage-electrolyzer}
+    u_{\textrm{act}} = s_{\textrm{an}}\ln\left( \dfrac{1}{t_{\textrm{an}}}i_{\textrm{act,an}}+1\right) 
+    + s_{\textrm{ca}}\ln\left( \dfrac{1}{t_{\textrm{ca}}}i_{\textrm{act,ca}}+1\right)
+\end{align}
+
+As depicted in Fig. \ref{fig:static-dynamic-electrical-model}, two capacitors $C_{\textrm{an}}$ and $C_{\textrm{ca}}$ are connected in parallel with the nonlinear resistors to represent the electric double-layer (EDL) effect at each electrode. The phenomenon is formed at the interface between an electrode and electrolyte, making the electrolyzer behave like a dielectric during changes in rate of oxidation and reduction at the electrodes \cite{grahame_electrical_1947, URSUA201218598}. The arrangement of ions in the EDL affects the transfer of electrons and ions during the electrochemical reactions, which directly influences the activation overvoltage. During dynamic operations the EDL therefore impacts how quickly the system responds \cite{grahame_electrical_1947}.
+% The activation overvoltage $u_{\textrm{act,\textrm{i}}}$ is adjusted by placing a capacitor in parallel to represent the dynamic nature of the electrolyzer system.
+% \begin{align} \label{eq:double-layer-effect-voltage}
+%     \dfrac{du_{\textrm{act,i}}(t)}{dt} & = \dfrac{1}{C_{\textrm{i}}}\left[i_{\textrm{E}} - i_{\textrm{act,\textrm{i}}}\left(u_{\textrm{act,\textrm{i}}}(t)\right) \right]
+% \end{align}
+% \begin{figure}[htbp]
+%     \centering
+%     \def\svgwidth{0.5\linewidth}
+%     \input{edl_equivalent_circuit.pdf_tex}
+%     \caption{Double-layer effect equivalent $RC$ circuit.}
+%     \label{fig:double-layer-effect-eq-circuit}
+% \end{figure}
+
+% The Randles equivalent circuit is a basic model that describes electrochemical processes at the
+% electrode-electrolyte interface, consisting of resistors and capacitors for depicting
+% EDL \cite{JIANG2021120220}. Thus the resistor is modified to operate as a controlled current source 
+% according to \ref{eq:tafel-equation-act-current} representing electrolyzer nonlinearities, with a
+% parallel capacitor to illustrate the dynamic characteristics of the EDL for each electrode. The 
+% equivalent circuit can be used to model $u_{\textrm{act,E}}$ of both AWE and PEMWE systems 
+% \cite{URSUA201218598,puranen_using_2024}.
+% When the current $i_{\textrm{E}}$ is a pure DC without any harmonics, the electrode capacitors $C_{dl,a}$ and 
+% $C_{dl,c}$ function as open circuits.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \def\svgwidth{\linewidth}
+%     \input{activation_overvoltage_equivalent_circuit.pdf_tex}
+%     \caption{The equivalent electric circuit representing the activation phenomena and double-layer effects 
+%     of an electrolyzer stack, where $C_{dl,i,E} = \dfrac{C_{dl,\textrm{i}}}{N_s}$ \cite{URSUA201218598}.}
+%     \label{fig:activation-overvoltage-eq-circuit}
+% \end{figure}
+A state-space representation of the electrolyzer is derived with nonlinear and dynamic effects 
+taken into account. The dynamic behavior is expressed as
+\begin{align}
+    C_{\textrm{an}}\dfrac{\textrm{d}u_{\textrm{act,an}}}{\textrm{d}t} 
+    &= i_{\textrm{E}} - i_{\textrm{act,an}}(u_{\textrm{act,an}}) \tag{19a} \\[5px]
+    C_{\textrm{ca}}\dfrac{\textrm{d}u_{\textrm{act,ca}}}{\textrm{d}t} 
+    &= i_{\textrm{E}} - i_{\textrm{act,ca}}(u_{\textrm{act,ca}}) \tag{19b}
+\end{align}\setcounter{equation}{19}
+% where $C_{\textrm{an}}$ and $C_{\textrm{ca}}$ are the capacitance of anode and cathode 
+% respectively.
+The resulting state-space representation of the electrolyzer stack voltage is
+\begin{align}
+    u_{\textrm{E}} &= R_{\textrm{ohm}}i_{\textrm{E}} + u_{\textrm{act,an}} 
+    + u_{\textrm{act,ca}} + u_{\textrm{rev}}
+\end{align}
+
+Fig. \ref{fig:example-region-division} illustrates the nonlinear ii-uu characteristics of an alkaline electrolyzer, with the behavior further divided into sections contributing to this response. The curve begins at approximately 28 V, which is the reversible voltage. The nonlinear increase in voltage with current corresponds to the activation overvoltage, while the linear increase following the nonlinear behavior represents the ohmic overvoltage. These characteristics are directly influenced by the operating temperature and pressure. Fig. \ref{fig:example-nonlinear-behavior} shows that behavior, where the $i-u$ characteristics were determined at three different temperatures: $15^{\circ} \textrm{C}$, $35^{\circ} \textrm{C}$ and $65^{\circ} \textrm{C}$, under a constant pressure of $25$ bars. The results indicate that the overall electrolyzer voltage $u_{\textrm{E}}$ decreases as the operating temperature increases.
+
+\section{Linearized model} \label{sec:linearized-model}
+Linearization facilitates the analysis of complex nonlinear systems by approximating 
+them with linear equations around a specific operating point. For electrolyzers, electrochemical impedance spectroscopy is applied to determine the equivalent electrical impedance \cite{URSUA201218598, puranen_using_2024}. It allows for the investigation of the charge transfer kinetics and mechanisms of a specific electrochemical process, in this case, the ionic movement between the electrodes and the electrolyte. Applying the linearization results in the impedance to be
+\begin{align}
+    \begin{split}
+        \textrm{Z}(s) &= \dfrac{u_{\textrm{E}}(s)}{i_{\textrm{E}}(s)} \\[5px] 
+        &= R_{\textrm{ohm}} 
+        + \dfrac{R_{\textrm{act,an}}}{1 + sR_{\textrm{act,an}}C_{\textrm{an}}}
+        + \dfrac{R_{\textrm{act,ca}}}{1 + sR_{\textrm{act,ca}}C_{\textrm{ca}}}
+    \end{split}    
+\end{align}
+where $R_{\textrm{act,an}}$ and $R_{\textrm{act,ca}}$ are incremental resistances depending on 
+operating point current through the electrodes.
+\begin{figure}[t!]
+    \centering
+    \includesvg[width=\columnwidth]{nyquist-example.svg}
+    \caption{Nyquist plot for the total electrolyzer impedance.}
+    \label{fig:nyquist-plot-example}
+\end{figure}
+\begin{figure}[t!]
+    \centering
+    \includesvg[width=\columnwidth]{nyquist-plot-three-currents-example.svg}
+    \caption{Nyquist plot for the total electrolyzer impedance at three different currents.}
+    \label{fig:nyquist-plot-example-three-currents}
+\end{figure}
+\begin{table}[t!]
+    \renewcommand{\arraystretch}{1.2}
+    \begin{center}
+        \caption{Parameters used to plot Fig. \ref{fig:nyquist-plot-example}}
+        \begin{tabular}{l c l c}
+            \hline
+            $R_{\textrm{ohm}}$ & $0.032\, \Omega$ & & \\
+            $R_{\textrm{act,an}}$ & $0.023\, \Omega$ & $R_{\textrm{act,ca}}$  & $0.023\, \Omega$ \\
+            $C_{\textrm{an}}$ & $0.638\, \textrm{F}$ & $C_{\textrm{ca}}$ & $0.031\, \textrm{F}$ \\
+            \hline
+        \end{tabular}
+        \label{table:electrolyze-nyquist-parameters}
+    \end{center}        
+\end{table}
+\begin{table}[b]
+    \caption{Required Parameters of the Electrolyzer Model}
+        \begin{center}
+            \renewcommand{\arraystretch}{1.2}
+            \begin{tabular}{l c l c}
+                \hline
+                $N_\textrm{s}$ & $22$ & $A$ & $0.03 \, \textrm{m}^2$ \\
+                $r_1$ & $59.55\cdot10^{-6} \, \Omega \, \textrm{m}^2$ & $r_2$ & $-340.82\cdot10^{-9} \, \Omega \, \textrm{m}^2 \degree \textrm{C}^{-1}$ \\
+                $r_3$ & $-106.97\cdot 10^{-6} \, \Omega \, \textrm{m}^2 \, \degree \textrm{C}$ & $r_4$ & $2.71\cdot 10^{-3} \, \Omega \, \textrm{m}^2 \, \degree \textrm{C}^{2}$ \\
+                $s_{\textrm{1,an}}$ & $25.23\cdot10^{-3} \, \textrm{V}$ & $s_{\textrm{1,ca}}$ & $110.36\cdot10^{-3} \, \textrm{V}$ \\
+                $s_{\textrm{2,an}}$ & $ -234.03\cdot10^{-6} \, \textrm{V} \, \degree \textrm{C}^{-1}$ & $s_{\textrm{2,ca}}$ & $-1.65\cdot10^{-3} \, \textrm{V} \, \degree \textrm{C}^{-1}$ \\
+                $s_{\textrm{3,an}}$ & $3.18\cdot10^{-6} \, \textrm{V} \, \degree \textrm{C}^{-2}$ & $s_{\textrm{3,ca}}$ & $22.83\cdot10^{-6} \, \textrm{V} \, \degree \textrm{C}^{-2}$ \\
+                $t_{\textrm{1,an}}$ & $54.62\cdot10^{-3} \, \textrm{A}$ & $t_{\textrm{1,ca}}$ & $45.70 \, \textrm{A}$ \\
+                $t_{\textrm{2,an}}$ & $-2.46\cdot10^{-3} \, \textrm{A} \, \degree \textrm{C}^{-1}$ & $t_{\textrm{2,ca}}$ & $ 0.78 \, \textrm{A} \, \degree \textrm{C}^{-1}$ \\
+                $t_{\textrm{3,an}}$ & $52.12\cdot10^{-6} \, \textrm{A} \, \degree \textrm{C}^{-2}$ & $t_{\textrm{3,ca}}$ & $-10.57\cdot10^{-3} \, \textrm{A} \, \degree \textrm{C}^{-2}$ \\
+                $C_{\textrm{an}}$ & $0.6373 \, \textrm{F}$ & $C_{\textrm{ca}}$ & $0.0307 \, \textrm{F}$ \\
+                \hline
+            \end{tabular}
+            \label{table:electrolyzer:parameters}
+        \end{center}    
+\end{table}  
+% \begin{align}
+%     R_{\textrm{act,an}} = \dfrac{\partial u_{\textrm{act,an}}}{\partial i_{\textrm{act,an}}} \tag{26a} \\[5px] 
+%     R_{\textrm{act,ca}} = \dfrac{\partial u_{\textrm{act,ca}}}{\partial i_{\textrm{act,ca}}} \tag{26b}
+% \end{align}\setcounter{equation}{26}
+The impedance response across a spectrum of frequencies is analyzed through Nyquist plot as presented in Fig. \ref{fig:nyquist-plot-example}. The parameters used for the plot are given in Table \ref{table:electrolyze-nyquist-parameters}. At higher frequencies, the contributions of nonlinear components diminish towards zero, causing the impedance of the electrolyzer to approximate that of a pure resistor. The impedance value varies with the supplied current. This indicates that high-frequency ripples, which are generally produced by power semiconductors have minimal or no effect on the output characteristics of the electrolyzer.
+
+The supplied current value, $i_{\textrm{E}}$ influences the behavior of the impedances. As the input current increases, the impact of nonlinear resistances diminishes, leading to a system response that approaches linear ohmic resistance. As shown in Fig. \ref{fig:nyquist-plot-example-three-currents}, this behavior can be attributed to the fact that higher current levels tend to dominate over the variations introduced by nonlinear elements, effectively reducing their relative contribution to the overall impedance characteristics. The parameters used for plotting the figure have been given in Table \ref{table:electrolyzer:parameters}.   
+
+Overall, electrolyzers can be characterized as linear systems when operating under conditions of high-frequency and high-current. This characteristic is particularly significant in the context of the dynamic response and overall efficiency of electrolyzers when their current supply is managed by semiconductor-based power converters. Further research is ongoing to investigate the impact of this behavior on the degradation of electrolyzer cells \cite{siemens_water_electrolysis_2023}. A more comprehensive multi-physics approach, incorporating factors such as gas production rates and the dynamics of temperature and pressure, may provide valuable insights and help address these questions in future studies.
+
+
+\section{Model Simulation} \label{sec:simulation}
+The electrical equivalent circuit discussed in Section \ref{sec:electrical-modeling} is 
+implemented in PLECS to validate its behavior under two static and dynamic operating conditions 
+relevant to both alkaline and PEM electrolyzers. The key parameters necessary for the development and simulation of the model have been extracted from the literature\cite{URSUA201218598} of a $1 \, \textrm{Nm}^3\textrm{h}^{-1}$ alkaline electrolyzer and has been recorded in Table \ref{table:electrolyzer:parameters}. The operating temperature and pressure of the system has been set to $45^{\circ}\textrm{C}$ and $25$ bars respectively.
+% The simulation was conducted at a constant pressure of $25$ bar, with the temperature varied at 15$^\circ$ C, 35$^\circ$ C and 65$^\circ$ C, to replicate the scenario illustrated in Figure \ref{fig:example-nonlinear-behavior}. 
+The standard reversible voltage has been derived using \cite{LeRoy_1980}
+\begin{align}\label{eq:std-rev-voltage-leroy}
+    \begin{split}
+        u^0_{\textrm{rev}} & = 1.5184 \, \textrm{V} - (1.5421\cdot 10^{-3} \, \textrm{VK}^{-1} )T \\
+                    & \qquad + (9.523\cdot 10^{-5} \textrm{VK}^{-1})T\ln{T} \\
+                    & \qquad + (9.84\cdot 10^{-8}\textrm{VK}^{-2})T^2
+    \end{split}
+\end{align}
+The electrolyzer utilizes a potassium hydroxide-based electrolyte, and the saturated vapor pressure has been determined accordingly.
+\begin{align} \label{eq:sat-water-vapour-pressure-pure-water}
+    p_{\textrm{sv,E}}(T,m) & = 10^{\textrm{a}}p_{\textrm{sv}}(T)^{\textrm{b}} \tag{23a}
+\end{align}
+where a and b are parameters obtained experimentally based on electrolyte type and molality \cite{JARVINEN202231985}.
+\begin{align} 
+    \textrm{a} &= -0.01m - 1.68\cdot10^{-3}m^2 + 2.26\cdot10^{-5}m^3 \tag{23b} \label{eq:sat-water-vapour-pressure-pure-water-param-a-koh} \\
+    \textrm{b} &= 1 - 1.21\cdot 10^{-3}m  + 5.60\cdot 10^{-4}m^2 - 7.82\cdot 10^{-6}m^3 \label{eq:sat-water-vapour-pressure-pure-water-param-b-koh} \tag{23c}
+\end{align}\setcounter{equation}{23}
+\begin{lstlisting}[language=C, caption=Code snippet for obtaining total reversible voltage, label=lst:reversible-voltage]
+// Vapour pressure of pure water
+P_v_h2o = exp(81.6179 - (7699.68/T_kelvin) - 10.9*log(T_kelvin) + 9.5891*pow(10, -3)*T_kelvin);
+    
+//Parameters dependent on KOH solution molal concentration
+a = -0.0151*m -(1.6788*pow(10, -3)*pow(m, 2)) + (2.2588*pow(10, -5)*pow(m, 3));
+b = 1 - 1.2062*pow(10, -3)*m + 5.6024*pow(10, -4)*pow(m, 2) - 7.8228*pow(10, -6)*pow(m, 3);
+    
+//Vapour pressure of KOH solution
+P_v_koh = exp(2.302*a + b*log(P_v_h2o));
+    
+//Water activity of KOH solution
+a_h2o_koh = exp(-0.05192*m + 0.003302*pow(m, 2) + (3.177*m - 2.131*pow(m, 2))/T_kelvin);
+    
+//Pressure error
+e = P - P_v_koh;
+    
+//Standard reversible voltage
+U_rev_o = 1.5184 - (1.5421*pow(10, -3)*T_kelvin) + (9.526*pow(10, -5)*T_kelvin*log(T_kelvin) + (9.84*pow(10, -8)*(T_kelvin)));
+    
+// Reversible voltage
+U_rev = N_s*(U_rev_o + R*T_kelvin*log(e*sqrt(e)/a_h2o_koh)/(n_e*F));    
+\end{lstlisting}
+Listing \ref{lst:reversible-voltage} presents the PLECS C-Scripts utilized to determine the total reversible voltage, using \eqref{eq:std-rev-voltage-leroy}, \eqref{eq:sat-water-vapour-pressure-pure-water}, \eqref{eq:sat-water-vapour-pressure-pure-water-param-a-koh} and \eqref{eq:sat-water-vapour-pressure-pure-water-param-b-koh}.
+% \begin{lstlisting}[language=C, caption=Code snippet for obtaining the current associated with the activation overvoltage of anode, label=lst:activation-voltage]
+% // Activation parameters
+% s = s_1 + s_2*T + s_3*pow(T, 2);
+% t = t_1 + t_2*T + t_3*pow(T, 2);
+    
+% // Activation voltage for anode
+% I_act_a = t*(exp(U_act_a/(N_s * s)) - 1);    
+% \end{lstlisting}
+
+
+First, the electrolyzer model was simulated using a pure DC current of 60 A supplied to the system. This resulted in an output voltage of approximately 34.5 V, which closely aligns with the experimental results presented in \cite{URSUA201218598}. Fig. \ref{fig:dc-power-supply} shows the input current and voltage waveforms. Subsequently, a six-pulse thyristor rectifier was employed as the power supply for the model, with a fixed pulse generation at a firing angle of zero degrees. The input current exhibited an average value of 65 A, resulting in an average output voltage of 34.57 V. As shown in Fig. \ref{fig:thy-power-supply}(\subref{fig:thy-power-supply-vi}), the waveforms exhibit harmonic content. Fig. \ref{fig:thy-power-supply}(\subref{fig:thy-power-supply-thd}) presents the Fourier analysis of the output voltage and current, indicating that 150 Hz harmonics dominate in the current, along with other higher-order harmonics.
+% The input DC current was varied from 0 A to 120 A, and the corresponding $i-u$ characteristics were plotted for the model. The obtained results closely matched the static operation plots reported in the literature \cite{URSUA201218598} and \cite{Iribarran2023Dynamic}.
+% \begin{figure}[htbp]
+%     \centering
+%     \def\svgwidth{\linewidth}
+%     \input{iu-characteristics-plecs-simulation.pdf_tex}
+%     \caption{Simulation results from PLECS.}
+%     \label{fig:simulation-nonlinear-behavior}
+% \end{figure}
+
+% \begin{figure}[t!]
+%     \centering
+%     \includesvg[width=\linewidth]{nyquist-plot-three-currents.svg}
+%     \caption{Nyquist plot for the total electrolyzer impedance at three 
+%     different currents}
+%     \label{fig:nyquist-plot}
+% \end{figure}
+
+\section{Conclusion} \label{sec:conclusion}
+This paper presents a comprehensive electrical model of electrolyzers, designed to capture both their nonlinear characteristics and dynamic behavior. The model is versatile and applicable to various electrolyzer technologies, including alkaline and PEM electrolyzers. Furthermore, it is adaptable to represent emerging electrolyzer technologies with different operational parameters, such as variations in operating points and additional overpotential losses. Frequency response analysis of the total impedance indicates that electrolyzers display resistive behavior at high frequencies. This observation provides valuable insights into their dynamic performance, which is particularly beneficial when power converters are employed as the primary source of electricity for these systems. Finally, the simulation results of the model, performed in PLECS at constant temperature and pressure were validated against the experimental results from the referenced literature, confirming the model's accuracy.
+\begin{figure}[t!]
+    \centering
+    \def\svgwidth{0.965\columnwidth}
+    \input{dc-vol-cur.pdf_tex}
+    \caption{Simulated voltage and current waveforms when current is supplied from pure DC current source.}
+    \label{fig:dc-power-supply}
+\end{figure}
+\begin{figure}[t!]
+    \begin{subfigure}{\columnwidth}
+        \centering
+        \def\svgwidth{\columnwidth}
+        \input{thy-vol-cur.pdf_tex}
+        \caption{}
+        \label{fig:thy-power-supply-vi}
+    \end{subfigure}
+    \begin{subfigure}{\columnwidth}
+        \centering
+        \def\svgwidth{0.965\columnwidth}
+        \input{thd.pdf_tex}
+        \caption{}
+        \label{fig:thy-power-supply-thd}
+    \end{subfigure}
+    \caption{Simulated results with current supplied from six-pulse thyristor rectifier (a) Voltage and current waveforms, (b) Fourier analysis of output voltage and current.}
+    \label{fig:thy-power-supply}
+\end{figure}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,Electrolyzer}
+
+\end{document}
